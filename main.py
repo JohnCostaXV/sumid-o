@@ -83,6 +83,8 @@ async def on_message(message):
 
     if message.content.lower().startswith("d.clone"):
         try:
+            msg = message.content.split(" ")
+            message = " ".join(msg[1:])
             pfp = requests.get(message.author.avatar_url_as(format='png', size=256)).content
             hook = await message.channel.create_webhook(name=message.author.display_name, avatar=pfp)
             await hook.send(message)
