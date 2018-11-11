@@ -25,7 +25,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content.lower().startswith(prefix+"suafoto"):
+    if message.content.lower().startswith("d.suafoto"):
         user = message.mentions[0]
         if user is None:
             url = requests.get(message.author.avatar_url)
@@ -53,7 +53,7 @@ async def on_message(message):
             await message.channel.send(file=discord.File('suafoto.png'))
     
     
-    if message.content.lower().startswith(prefix+"ship"):
+    if message.content.lower().startswith("d.ship"):
         try:
 
             url1 = requests.get(message.mentions[0].avatar_url)
@@ -81,7 +81,7 @@ async def on_message(message):
             await message.channel.send(f"**{message.author.name}**, você precisa **mencionar dois usuários** diferentes.")
     
 
-    if message.content.lower().startswith(prefix+"clone"):
+    if message.content.lower().startswith("d.clone"):
         try:
             pfp = requests.get(message.author.avatar_url_as(format='png', size=256)).content
             hook = await message.channel.create_webhook(name=message.author.display_name, avatar=pfp)
