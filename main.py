@@ -9,113 +9,87 @@ import pymongo
 import random
 import asyncio
 import time
+import os
 
-prefix = ["d.", "diane "]
+prefix = ["d."]
 
 client = commands.Bot(command_prefix=prefix, case_insensitive=True)
 shared = discord.AutoShardedClient(shard_count=2, shard_ids=(1,2))
 client.remove_command("help")
 
 
-modulos = ["cogs.fun", "cogs.giveaway", "cogs.banco", "cogs.minecraft"]
 
 @client.event
 async def on_ready():
-    print("=========================")
-    print(f"Nome: {client.user.name}")
-    print(f"ID: {client.user.id}")
-    print("BOT: Online")
-    print("=========================")
-
+    print("BOT ONLINE")
 
 @client.event
-async def on_guild_join(guild):
-    url = "mongodb://admin:J123456@ds023428.mlab.com:23428/zephyr_bot"
-    mongo = MongoClient(url)
-    zephyr_bot = mongo["zephyr_bot"]
-    servidores = zephyr_bot["servidores"]
-    servidor = {
-        "_ServidorID":str(guild.id),
-        "ServidorNome":str(guild.name),
-        "CanalBV":"nenhum",
-        "OnBV":"não",
-        "BVmsg":"Nenhum",
-        "Tipomsg":"Nenhuma",
-        "Modrole":"Nenhuma"
-    }
-    zephyr_bot.servidores.insert_one(servidor).inserted_id
-
-    print(f"Servidor detectado: {guild.name}({guild.id}).")
-    print("Já foi registrado no banco de dados!")
-
-@client.event
-async def on_guild_remove(guild):
-    url = "mongodb://admin:J123456@ds023428.mlab.com:23428/zephyr_bot"
-    mongo = MongoClient(url)
-    zephyr_bot = mongo["zephyr_bot"]
-    servidores = zephyr_bot["servidores"]
-    zephyr_bot.servidores.delete_one({"_ServidorID":str(guild.id)})
-
-    print(f"Acabei de sair do {guild.name}.")
-    print("Todos dados foram deletados.")
-
-
-@client.event
-async def on_member_join(member):
-        url = "mongodb://admin:J123456@ds023428.mlab.com:23428/zephyr_bot"
-        mongo = MongoClient(url)
-        zephyr_bot = mongo["zephyr_bot"]
-        servidores = zephyr_bot["servidores"]
-        banco = zephyr_bot.servidores.find_one({"_ServidorID":str(member.guild.id)})
-        msg = banco["BVmsg"]
-        canal = banco["CanalBV"]
-        tipo = banco["Tipomsg"]
-
-
-        if banco["Tipomsg"] == "1":
-            url = requests.get(member.avatar_url)
+async def on_message(message):
+    if message.content.lower().startswith(prefix+"suafoto"):
+        user = message.mentions[0]
+        if user is None:
+            url = requests.get(message.author.avatar_url)
             avatar = Image.open(BytesIO(url.content))
-            avatar = avatar.resize((320, 320));
-            bigsize = (avatar.size[0] * 3,  avatar.size[1] * 3)
-            mask = Image.new('L', bigsize, 0)
-            draw = ImageDraw.Draw(mask)
-            draw.ellipse((0, 0) + bigsize, fill=255)
-            mask = mask.resize(avatar.size, Image.ANTIALIAS)
-            avatar.putalpha(mask)
+            #                  largura x altura
+            avatar = avatar.resize((325, 375));
+            avatar.save('suafoto.png')
 
-            output = ImageOps.fit(avatar, mask.size, centering=(0.5, 0.5))
-            output.putalpha(mask)
-            output.save('avatar.png')
+            fundo = Image.open('fototua.png')
+            fundo.paste(avatar, (210, 90))
+            fundo.save('suafoto.png')
 
-            #avatar = Image.open('avatar.png')
-            fundo = Image.open('bemvindo.jpg')
-            fonte = ImageFont.truetype('BebasNeue.ttf',70)
-            fonte1 = ImageFont.truetype('BebasNeue.ttf', 100)
-            escrever = ImageDraw.Draw(fundo)
-            escrever.text(xy=(620,650), text="Bem-vindo", fill=(224, 235, 234), font=fonte1)
-            escrever.text(xy=(700,750), text=member.name, fill=(224, 235, 234), font=fonte)
-            fundo.paste(avatar, (620, 290), avatar)
-            fundo.save('bv.png')
-
-            await client.get_channel(canal).send(member.mention)
-            await client.get_channel(canal).send(file=discord.File('bv.png'))
-        
-        elif banco["Tipomsg"] == "2":
-            await client.get_channel(canal).send(msg.replace("{servidor_name.upper}",str(member.guild.name.upper())).replace("{membro_mention}",str(member.mention)).replace("{servidor_name}",str(member.guild.name)).replace("{servidor_id}",str(member.guild.id)).replace("{membro_id}",str(member.id)).replace("{membro_name}",str(member.name)))
-        elif banco["Tipomsg"] == "3":
-            return
+            await message.channel.send(file=discord.File('suafoto.png'))
         else:
-            pass
+            url = requests.get(user.avatar_url)
+            avatar = Image.open(BytesIO(url.content))
+            #                  largura x altura
+            avatar = avatar.resize((325, 375));
+            avatar.save('suafoto.png')
+
+            fundo = Image.open('fototua.png')
+            fundo.paste(avatar, (210, 90))
+            fundo.save('suafoto.png')
+
+            await message.channel.send(file=discord.File('suafoto.png'))
+    
+    
+    if message.content.lower().startswith(prefix+"ship"):
+        try:
+
+            url1 = requests.get(message.mentions[0].avatar_url)
+            url2 = requests.get(message.mentions[1].avatar_url)
+            ship_img = requests.get('https://cdn.discordapp.com/attachments/425866183904854029/488105962734092289/ship_img.png')
+            avatar1 = Image.open(BytesIO(url1.content))
+            avatar2 = Image.open(BytesIO(url2.content))
+            avatar1 = avatar1.resize((400, 400), Image.ANTIALIAS);
+            avatar2 = avatar2.resize((400, 400), Image.ANTIALIAS);
+            ship = Image.open(BytesIO(ship_img.content))
+            ship.paste(avatar1, (0, 0))
+            ship.paste(avatar2, (800, 0))
+            ship.save('ship.png')
+            cont = message.mentions[0].name
+            cont2 = message.mentions[1].name
+            cont3 = len(cont2)
+            cont4 = cont3 - 4
+            cont5 = cont[0:4]
+            cont6 = cont2[cont4:cont3]
+            cont7 = cont5 + cont6
+            chance = random.randint(10,100)
+            await message.channel.send(f"Esse canal tem **{chance}%** de chance de dar certo!\n\n**{cont7}**")
+            await message.channel.send(file=discord.File('ship.png'))
+        except IndexError:
+            await message.channel.send(f"**{message.author.name}**, você precisa **mencionar dois usuários** diferentes.")
     
 
+    if message.content.lower().startswith(prefix+"clone"):
+        try:
+            pfp = requests.get(message.author.avatar_url_as(format='png', size=256)).content
+            hook = await message.channel.create_webhook(name=message.author.display_name, avatar=pfp)
+            await hook.send(message)
+            await hook.delete()
+        except discord.errors.Forbidden:
+            await message.channel.send(f"❌ | **{message.author.name}**, estou **sem permissão** de `GERENCIAR WEBHOOKS`.")
 
 
-if __name__ == "__main__":
- try:
-   for modulo in modulos:
-     client.load_extension(modulo)
- except Exception as error:
-     print(f"[Erro] : {modulo} - {error}")
 
-
-client.run()
+client.run(os.environ.get("token"))
