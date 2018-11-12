@@ -25,6 +25,18 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    if message.content.lower().startswith("d.1mcskin"):
+        msg = message.content.split(" ")
+        username = " ".join(msg[1])
+        skin_img = requests.get(f'https://mc-heads.net/body/{username}')
+
+        skin = Image.open(BytesIO(skin_img.content))
+        skin.save('skin.png')
+        
+        await message.channel.send(message.author.mention)
+        await message.channel.send(file=discord.File('skin.png'))
+
+
     if message.content.lower().startswith("d.suafoto"):
         user = message.mentions[0]
         if not user:
