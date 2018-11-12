@@ -114,6 +114,7 @@ async def on_message(message):
 
     if message.content.lower().startswith("d.addbot"):
         try:
+            server = message.channel
             new = client.get_guild(498011182620475412)
             if message.author not in new.members:
                 return await message.channel.send(f"<:incorreto:510894050103263245> **| {message.author.name}**, você precisa ser membro do servidor **`New Dev's`** para cadastrar seu bot.\n**CONVITE:** `https://discord.me/NewDevs`")
@@ -128,7 +129,7 @@ async def on_message(message):
 
             msg = await author.send("<:parceiro:510894109758586901> **|** **Então você quer adicionar o seu bot em nosso servidor?**\nPara isso precisamos que você preencha um pequeno formulário para cadastramento de seu BOT em nosso sistema e discord.\n\n<:bot:437248340724416514> **|** **Insira o `ID` do bot que deseja adicionar:** `2 minutos`")
             try:
-                if message.author is not message.guid:
+                if message.author is not server:
                     idbot = await client.wait_for('message', check=lambda message: message.author == author, timeout=120)
                         
                     if idbot.content == idbot.content:
