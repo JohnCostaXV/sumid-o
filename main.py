@@ -128,7 +128,7 @@ async def on_message(message):
 
             msg = await author.send("<:parceiro:510894109758586901> **|** **Então você quer adicionar o seu bot em nosso servidor?**\nPara isso precisamos que você preencha um pequeno formulário para cadastramento de seu BOT em nosso sistema e discord.\n\n<:bot:437248340724416514> **|** **Insira o `ID` do bot que deseja adicionar:** `2 minutos`")
             try:
-                if message.guild is not None:
+                if message.author is not message.guid:
                     idbot = await client.wait_for('message', check=lambda message: message.author == author, timeout=120)
                         
                     if idbot.content == idbot.content:
