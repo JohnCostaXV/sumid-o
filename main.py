@@ -188,7 +188,7 @@ async def on_message(message):
                                                             ).set_thumbnail(
                                                                 url=usuario.avatar_url
                                                             ).add_field(
-                                                                name='`📆 | Criado em`',
+                                                                name='📆 `| Criado em`',
                                                                 value=usuario.created_at.strftime('%d/%m/%y (%H:%M)')
                                                             ).add_field(
                                                                 name="<:DiscordDev:507925579245551616> `| Biblioteca`",
@@ -200,11 +200,11 @@ async def on_message(message):
                                                                 name='<:Clyde:510894094877327360> `| Prefixo`',
                                                                 value=prefix.content
                                                             ).add_field(
-                                                                name='`📋 | Descrição`',
+                                                                name='📋 `| Descrição`',
                                                                 value="```Nenhuma```"
                                                             ).add_field(
-                                                                name='`🚀 | Convite`',
-                                                                value=f"https://discordapp.com/oauth2/authorize?client_id={usuario.id}&scope=bot&permissions="
+                                                                name='🚀 `| Convite`',
+                                                                value=f"[link](https://discordapp.com/oauth2/authorize?client_id={usuario.id}&scope=bot&permissions=)"
                                                             )
 
                                                             await client.get_channel(507570211499671576).send(embed=pendenteEm)                              
@@ -229,22 +229,22 @@ async def on_message(message):
                                                     ).set_thumbnail(
                                                         url=usuario.avatar_url
                                                     ).add_field(
-                                                        name='`📆 | Criado em`',
+                                                        name='📆 `| Criado em`',
                                                         value=usuario.created_at.strftime('%d/%m/%y (%H:%M)')
                                                     ).add_field(
-                                                        name="`<:DiscordDev:507925579245551616> | Biblioteca`",
+                                                        name="<:DiscordDev:507925579245551616> `| Biblioteca`",
                                                         value=lang.content
                                                     ).add_field(
-                                                        name='`<:parceiro:510894109758586901> | Dono`',
+                                                        name='<:parceiro:510894109758586901> `| Dono`',
                                                         value=f"**{message.author}**\n`{message.author.id}`"
                                                     ).add_field(
-                                                        name='`<:Clyde:510894094877327360> | Prefixo`',
+                                                        name='<:Clyde:510894094877327360> `| Prefixo`',
                                                         value=prefix.content
                                                     ).add_field(
-                                                        name='`📋 | Descrição`',
+                                                        name='📋 `| Descrição`',
                                                         value="```Nenhuma```"
                                                     ).add_field(
-                                                        name='`🚀 | Convite`',
+                                                        name='🚀 `| Convite`',
                                                         value=f"[link](https://discordapp.com/oauth2/authorize?client_id={usuario.id}&scope=bot&permissions=)"
                                                     )
 
