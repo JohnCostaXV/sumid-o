@@ -61,10 +61,11 @@ async def on_message(message):
         capa_img = requests.get(f"http://s.optifine.net/capes/{capa}.png")
         if capa_img == "Not found":
             return await message.channel.send("a")
-        server = Image.open(BytesIO(capa_img.content))
-        server.save('capa.png')
-        await message.channel.send(message.author.mention)
-        await message.channel.send(file=discord.File('capa.png'))
+        else:
+            server = Image.open(BytesIO(capa_img.content))
+            server.save('capa.png')
+            await message.channel.send(message.author.mention)
+            await message.channel.send(file=discord.File('capa.png'))
 
 
     if message.content.lower().startswith("d.suafoto"):
