@@ -27,7 +27,7 @@ async def on_ready():
 async def on_message(message):
     if message.content.lower().startswith("d.suafoto"):
         user = message.mentions[0]
-        if user is None:
+        if not user:
             url = requests.get(message.author.avatar_url)
             avatar = Image.open(BytesIO(url.content))
             #                  largura x altura
