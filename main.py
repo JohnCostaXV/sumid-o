@@ -59,7 +59,7 @@ async def on_message(message):
         msg = message.content.split(" ")
         capa = " ".join(msg[1:])
         capa_img = requests.get(f"http://s.optifine.net/capes/{capa}.png")
-        if capa_img == "Not found":
+        if capa_img.json() == "Not found":
             return await message.channel.send("a")
         else:
             server = Image.open(BytesIO(capa_img.content))
