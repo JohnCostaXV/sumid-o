@@ -55,6 +55,16 @@ async def on_message(message):
                 await message.channel.send('Verifique se o código hexadecimal é este formato: `#7289DA`')
 
 
+    if message.content.lower().startswith("d.capa"):
+        msg = message.content.split(" ")
+        capa = " ".join(msg[1:])
+        capa_img = requests.get(f"http://s.optifine.net/capes/{capa}.png")
+        server = Image.open(BytesIO(capa_img.content))
+        server.save('capa.png')
+        await message.channel.send(message.author.mention)
+        await message.channel.send(file=discord.File('capa.png'))
+
+
     if message.content.lower().startswith("d.suafoto"):
         url = requests.get(message.author.avatar_url)
         url1 = requests.get('https://i.imgur.com/VlvM1Au.png')
