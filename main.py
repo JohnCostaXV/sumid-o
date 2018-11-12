@@ -27,7 +27,7 @@ async def on_ready():
 async def on_message(message):
     if message.content.lower().startswith("d.1mcskin"):
         msg = message.content.split(" ")
-        username = " ".join(msg[1])
+        username = " ".join(msg[1:])
         skin_img = requests.get(f'https://mc-heads.net/body/{username}')
 
         skin = Image.open(BytesIO(skin_img.content))
