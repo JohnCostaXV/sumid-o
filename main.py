@@ -32,12 +32,15 @@ async def on_message(message):
         user = message.mentions[0]
         if not user:
             url = requests.get(message.author.avatar_url)
+            url1 = requests.get('https://i.imgur.com/VlvM1Au.png')
+            fundo = Image.open(BytesIO(url1.content))
             avatar = Image.open(BytesIO(url.content))
             #                  largura x altura
             avatar = avatar.resize((325, 375));
             avatar.save('suafoto.png')
 
-            fundo = Image.open('fototua.png')
+            
+
             fundo.paste(avatar, (210, 90))
             fundo.save('suafoto.png')
 
@@ -45,11 +48,12 @@ async def on_message(message):
         else:
             url = requests.get(user.avatar_url)
             avatar = Image.open(BytesIO(url.content))
+            url1 = requests.get('https://i.imgur.com/VlvM1Au.png')
+            fundo = Image.open(BytesIO(url1.content))
             #                  largura x altura
             avatar = avatar.resize((325, 375));
             avatar.save('suafoto.png')
 
-            fundo = Image.open('fototua.png')
             fundo.paste(avatar, (210, 90))
             fundo.save('suafoto.png')
 
