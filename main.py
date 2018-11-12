@@ -75,7 +75,7 @@ async def on_message(message):
             cont6 = cont2[cont4:cont3]
             cont7 = cont5 + cont6
             chance = random.randint(10,100)
-            await message.channel.send(f"Esse canal tem **{chance}%** de chance de dar certo!\n\n**{cont7}**")
+            await message.channel.send(f"Esse __casal__ tem **{chance}%** de chance de dar certo!\n\n**{cont7}**")
             await message.channel.send(file=discord.File('ship.png'))
         except IndexError:
             await message.channel.send(f"**{message.author.name}**, você precisa **mencionar dois usuários** diferentes.")
