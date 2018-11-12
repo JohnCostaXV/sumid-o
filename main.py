@@ -35,7 +35,7 @@ async def on_message(message):
             randgb = lambda: random.randint(0, 255)
             hexcode = '%02X%02X%02X' % (randgb(), randgb(), randgb())
             rgbcode = str(tuple(int(hexcode[i:i+2], 16) for i in (0, 2, 4)))
-            await message.channel.send('`Hex: #' + hexcode + '`\n`RGB: ' + rgbcode + '`')
+            await message.channel.send('`Hexadecimal: #' + hexcode + '`\n`RGB: ' + rgbcode + '`')
             heximg = Image.new("RGB", (64, 64), '#' + hexcode)
             heximg.save("color.png")
             await message.channel.send(file=discord.File('color.png'))
@@ -47,25 +47,12 @@ async def on_message(message):
                 elif len(hexcode) != 6:
                     await message.channel.send('Verifique se o código hexadecimal é este formato: `#7289DA`')
                 rgbcode = str(tuple(int(hexcode[i:i+2], 16) for i in (0, 2, 4)))
-                await message.channel.send('`Hex: #' + hexcode + '`\n`RGB: ' + rgbcode + '`')
+                await message.channel.send('`Hexadecimal: #' + hexcode + '`\n`RGB: ' + rgbcode + '`')
                 heximg = Image.new("RGB", (64, 64), '#' + hexcode)
                 heximg.save("color.png")
                 await message.channel.send(file=discord.File('color.png'))
             else:
                 await message.channel.send('Verifique se o código hexadecimal é este formato: `#7289DA`')
-
-
-    if message.content.lower().startswith("d.capa"):
-        msg = message.content.split(" ")
-        capa = " ".join(msg[1:])
-        capa_img = requests.get(f"http://s.optifine.net/capes/{capa}.png")
-        if capa_img.json() == "Not found":
-            return await message.channel.send("a")
-        else:
-            server = Image.open(BytesIO(capa_img.content))
-            server.save('capa.png')
-            await message.channel.send(message.author.mention)
-            await message.channel.send(file=discord.File('capa.png'))
 
 
     if message.content.lower().startswith("d.suafoto"):
