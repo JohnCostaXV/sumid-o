@@ -25,37 +25,35 @@ async def on_ready():
     print("BOT ONLINE")
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name="d.botinfo"))
 
-@client.command(aliases=['hex', 'color'])
-async def cor(ctx, inputcolor=''):
-    '''
-    Randomly picks a color, or displays a hex color
-    '''
-    if inputcolor == '':
-        randgb = lambda: random.randint(0, 255)
-        hexcode = '%02X%02X%02X' % (randgb(), randgb(), randgb())
-        rgbcode = str(tuple(int(hexcode[i:i+2], 16) for i in (0, 2, 4)))
-        await ctx.send('`Hex: #' + hexcode + '`\n`RGB: ' + rgbcode + '`')
-        heximg = Image.new("RGB", (64, 64), '#' + hexcode)
-        heximg.save("color.png")
-        await ctx.send(file=discord.File('color.png'))
-    else:
-        if inputcolor.startswith('#'):
-            hexcode = inputcolor[1:]
-            if len(hexcode) == 8:
-                hexcode = hexcode[:-2]
-            elif len(hexcode) != 6:
-                await ctx.send('Verifique se o código hexadecimal é este formato: `#7289DA`')
-            rgbcode = str(tuple(int(hexcode[i:i+2], 16) for i in (0, 2, 4)))
-            await ctx.send('`Hex: #' + hexcode + '`\n`RGB: ' + rgbcode + '`')
-            heximg = Image.new("RGB", (64, 64), '#' + hexcode)
-            heximg.save("color.png")
-            await ctx.send(file=discord.File('color.png'))
-        else:
-            await ctx.send('Verifique se o código hexadecimal é este formato: `#7289DA`')
 
 @client.event
 async def on_message(message):
-    
+    if message.content.lower().startswith("d.cor"):
+        msg = message.content.split(" ")
+        inputcolor = " ".join(msg[1:])
+        if inputcolor == '':
+            randgb = lambda: random.randint(0, 255)
+            hexcode = '%02X%02X%02X' % (randgb(), randgb(), randgb())
+            rgbcode = str(tuple(int(hexcode[i:i+2], 16) for i in (0, 2, 4)))
+            await message.channel.send('`Hex: #' + hexcode + '`\n`RGB: ' + rgbcode + '`')
+            heximg = Image.new("RGB", (64, 64), '#' + hexcode)
+            heximg.save("color.png")
+            await message.channel.send(file=discord.File('color.png'))
+        else:
+            if inputcolor.startswith('#'):
+                hexcode = inputcolor[1:]
+                if len(hexcode) == 8:
+                    hexcode = hexcode[:-2]
+                elif len(hexcode) != 6:
+                    await message.channel.send('Verifique se o código hexadecimal é este formato: `#7289DA`')
+                rgbcode = str(tuple(int(hexcode[i:i+2], 16) for i in (0, 2, 4)))
+                await message.channel.send('`Hex: #' + hexcode + '`\n`RGB: ' + rgbcode + '`')
+                heximg = Image.new("RGB", (64, 64), '#' + hexcode)
+                heximg.save("color.png")
+                await message.channel.send(file=discord.File('color.png'))
+            else:
+                await message.channel.send('Verifique se o código hexadecimal é este formato: `#7289DA`')
+
 
     if message.content.lower().startswith("d.suafoto"):
         url = requests.get(message.author.avatar_url)
