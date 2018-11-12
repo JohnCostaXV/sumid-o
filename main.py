@@ -179,8 +179,9 @@ async def on_message(message):
                                                             await out1.delete()
                                                             if out.content == out.content:
                                                                 await author.send(f"<:correto:510894022861127680> | **{message.author.name}**, você completou todo **processo** para **adicionar** o bot `{usuario}` em **nosso servidor**.\n**OBS:** O formulário passará para um supervisor para avaliação.")
-
-                                                                await message.channel.send(f"<:correto:510894022861127680> | {message.author.mention} **enviou** o bot `{usuario}` para ser **adicionado** em **nosso servidor**.")
+                                                                
+                                                                logs = client.get_channel(507498277097177098)
+                                                                await logs.send(f"<:correto:510894022861127680> | {message.author.mention} **enviou** o bot `{usuario}` para ser **adicionado** em **nosso servidor**.")
                                                         
                                                                 pendenteEm = discord.Embed(
                                                                     colour=cor,
@@ -221,7 +222,8 @@ async def on_message(message):
                                                     elif lang.content == lang.content:
                                                         await author.send(f"<:correto:510894022861127680> **|** **{message.author.name}**, você completou todo **processo** para **adicionar** o bot `{usuario}` em **nosso servidor**.\n**OBS:** O formulário passará para um supervisor para avaliação.")
 
-                                                        await message.channel.send(f"<:correto:510894022861127680> | {message.author.mention} **enviou** o bot `{usuario}` para ser **adicionado** em **nosso servidor**.")
+                                                        logs = client.get_channel(507498277097177098)
+                                                        await logs.send(f"<:correto:510894022861127680> | {message.author.mention} **enviou** o bot `{usuario}` para ser **adicionado** em **nosso servidor**.")
 
                                                         pendenteEm = discord.Embed(
                                                             colour=cor,
