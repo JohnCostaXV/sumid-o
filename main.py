@@ -126,7 +126,7 @@ async def on_message(message):
 
             msg = await author.send("<:parceiro:510894109758586901> **|** **Então você quer adicionar o seu bot em nosso servidor?**\nPara isso precisamos que você preencha um pequeno formulário para cadastramento de seu BOT em nosso sistema e discord.\n\n<:bot:437248340724416514> **|** **Insira o `ID` do bot que deseja adicionar:** `2 minutos`")
             try:
-                idbot = await client.wait_for('message', check=lambda message: message.author == author, timeout=120)
+                idbot = await client.wait_for('message', check=lambda message: message.author == message.author, timeout=120)
                     
                 if idbot.content == idbot.content:
                     await msg.delete()
@@ -150,7 +150,7 @@ async def on_message(message):
                                 p = await author.send("<:Clyde:510894094877327360> **|** **Diga-nos agora o prefixo do seu BOT:** `2 minutos` `(máximo 8 caracteres)`")
                                     
                                 try:
-                                    prefix = await client.wait_for('message', check=lambda message: message.author == author, timeout=120)
+                                    prefix = await client.wait_for('message', check=lambda message: message.author == message.author, timeout=120)
                                     await p.delete()
 
                                     if prefix.content == prefix.content:
@@ -169,7 +169,7 @@ async def on_message(message):
                                                 if lang.content == "Outros":
                                                     out1 = await author.send("<:DiscordDev:507925579245551616> **|** **Diga-nos o nome da biblioteca que você usou no desenvolvimento de seu BOT:** `2 minutos`")
                                                     try:
-                                                        out = await client.wait_for('message', check=lambda message: message.author == author, timeout=120)
+                                                        out = await client.wait_for('message', check=lambda message: message.author == message.author, timeout=120)
                                                         await out1.delete()
                                                         if out.content == out.content:
                                                             await author.send(f"<:correto:510894022861127680> | **{message.author.name}**, você completou todo **processo** para **adicionar** o bot `{usuario}` em **nosso servidor**.\n**OBS:** O formulário passará para um supervisor para avaliação.")
