@@ -191,11 +191,11 @@ async def on_message(message):
                                                                 name='`📆 | Criado em`',
                                                                 value=usuario.created_at.strftime('%d/%m/%y (%H:%M)')
                                                             ).add_field(
-                                                                name='<:parceiro:510894109758586901> `| Dono`',
-                                                                value=f"**{message.author}**\n`{message.author.id}`"
-                                                            ).add_field(
                                                                 name="<:DiscordDev:507925579245551616> `| Biblioteca`",
                                                                 value=out.content
+                                                            ).add_field(
+                                                                name='<:parceiro:510894109758586901> `| Dono`',
+                                                                value=f"**{message.author}**\n`{message.author.id}`"
                                                             ).add_field(
                                                                 name='<:Clyde:510894094877327360> `| Prefixo`',
                                                                 value=prefix.content
@@ -232,11 +232,11 @@ async def on_message(message):
                                                         name='`📆 | Criado em`',
                                                         value=usuario.created_at.strftime('%d/%m/%y (%H:%M)')
                                                     ).add_field(
-                                                        name='`<:parceiro:510894109758586901> | Dono`',
-                                                        value=f"**{message.author}**\n`{message.author.id}`"
-                                                    ).add_field(
                                                         name="`<:DiscordDev:507925579245551616> | Biblioteca`",
                                                         value=lang.content
+                                                    ).add_field(
+                                                        name='`<:parceiro:510894109758586901> | Dono`',
+                                                        value=f"**{message.author}**\n`{message.author.id}`"
                                                     ).add_field(
                                                         name='`<:Clyde:510894094877327360> | Prefixo`',
                                                         value=prefix.content
