@@ -248,8 +248,8 @@ async def on_message(message):
                                 except asyncio.TimeoutError:
                                     await p.delete()
 
-                    except Exception as e:
-                        await author.send(f"```{e}```")
+                    except:
+                        await author.send(f"<:incorreto:510894050103263245> | **{message.author.name}**, você pode apenas digitar um `ID` de um bot válido.")
                             
             except asyncio.TimeoutError:
                 await msg.delete()
