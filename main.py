@@ -13,6 +13,7 @@ import os
 import datetime
 
 prefix = ["d."]
+cor = 0xffa500
 
 client = commands.Bot(command_prefix=prefix, case_insensitive=True)
 shared = discord.AutoShardedClient(shard_count=2, shard_ids=(1,2))
@@ -177,7 +178,7 @@ async def on_message(message):
                                                             await message.channel.send(f"<:correto:510894022861127680> | {message.author.mention} **enviou** o bot `{usuario}` para ser **adicionado** em **nosso servidor**.")
                                                     
                                                             pendenteEm = discord.Embed(
-                                                                colour=0xFFFF00,
+                                                                colour=cor,
                                                                 description=f"**[TIPO]**: `Solicitação ADDBOT`\u200b",
                                                                 timestamp = datetime.datetime.utcnow()
                                                             ).set_author(
@@ -218,8 +219,8 @@ async def on_message(message):
                                                     await message.channel.send(f"<:correto:510894022861127680> | {message.author.mention} **enviou** o bot `{usuario}` para ser **adicionado** em **nosso servidor**.")
 
                                                     pendenteEm = discord.Embed(
-                                                        colour=0xFFFF00,
-                                                        description=f"**[TIPO]**: `Solicitação ADDBOT`\u200b",
+                                                        colour=cor,
+                                                        description=f"**[TIPO]**: `Solicitação BOT`\u200b",
                                                         timestamp = datetime.datetime.utcnow()
                                                     ).set_author(
                                                         name=str(usuario),
