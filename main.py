@@ -24,7 +24,7 @@ client.remove_command("help")
 @client.event
 async def on_ready():
     print("BOT ONLINE")
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{client.get_all_members()} seres humanos!"))
+    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{str(len(set(client.get_all_members())))} seres humanos!"))
 
 
 @client.event
