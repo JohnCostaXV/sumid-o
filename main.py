@@ -114,165 +114,166 @@ async def on_message(message):
 
     if message.content.lower().startswith("d.addbot"):
         try:
-            server = message.channel
-            new = client.get_guild(498011182620475412)
-            if message.author not in new.members:
-                return await message.channel.send(f"<:incorreto:510894050103263245> **| {message.author.name}**, você precisa ser membro do servidor **`New Dev's`** para cadastrar seu bot.\n**CONVITE:** `https://discord.me/NewDevs`")
-            
-            if message.author.bot:
-                return await message.channel.send("<:incorreto:510894050103263245> **|** BOTs não tem podem executar este comando!")
+            if message.guild == 498011182620475412:
+                server = message.channel
+                new = client.get_guild(498011182620475412)
+                if message.author not in new.members:
+                    return await message.channel.send(f"<:incorreto:510894050103263245> **| {message.author.name}**, você precisa ser membro do servidor **`New Dev's`** para cadastrar seu bot.\n**CONVITE:** `https://discord.me/NewDevs`")
+                
+                if message.author.bot:
+                    return await message.channel.send("<:incorreto:510894050103263245> **|** BOTs não tem podem executar este comando!")
 
-            author = message.author
-            await message.channel.send(f"**{message.author.name}**, verifique sua mensagens diretas.")
-            
-            
+                author = message.author
+                await message.channel.send(f"**{message.author.name}**, verifique sua mensagens diretas.")
+                
+                
 
-            msg = await author.send("<:parceiro:510894109758586901> **|** **Então você quer adicionar o seu bot em nosso servidor?**\nPara isso precisamos que você preencha um pequeno formulário para cadastramento de seu BOT em nosso sistema e discord.\n\n<:bot:437248340724416514> **|** **Insira o `ID` do bot que deseja adicionar:** `2 minutos`")
-            try:
-                if message.author is not server:
-                    idbot = await client.wait_for('message', check=lambda message: message.author == author, timeout=120)
-                        
-                    if idbot.content == idbot.content:
-                        await msg.delete()
-                        try:
-                            usuario = await client.get_user_info(int(str(idbot.content)))
-                            if usuario in message.guild.members:
-                                ex = await author.send(f"<:incorreto:510894050103263245> **| {message.author.name}**, o `ID` fornecido pertence ao bot `{usuario}` no qual **ELE NÃO É SEU**. ")
-                                
-                                await asyncio.sleep(20)
-                                await ex.delete()
-                            else:
-
-                                if usuario.bot == False:
-                                    erro = await author.send(f"<:incorreto:510894050103263245> **|** **{message.author.name}**, o `ID` que você forneceu **não corresponde** a de um **BOT** e por isso a **ação** foi **cancelada**.")
-                                        
-                                    await asyncio.sleep(20)
-                                    await erro.delete()
-                                    return
+                msg = await author.send("<:parceiro:510894109758586901> **|** **Então você quer adicionar o seu bot em nosso servidor?**\nPara isso precisamos que você preencha um pequeno formulário para cadastramento de seu BOT em nosso sistema e discord.\n\n<:bot:437248340724416514> **|** **Insira o `ID` do bot que deseja adicionar:** `2 minutos`")
+                try:
+                    if message.author is not server:
+                        idbot = await client.wait_for('message', check=lambda message: message.author == author, timeout=120)
+                            
+                        if idbot.content == idbot.content:
+                            await msg.delete()
+                            try:
+                                usuario = await client.get_user_info(int(str(idbot.content)))
+                                if usuario in message.guild.members:
+                                    ex = await author.send(f"<:incorreto:510894050103263245> **| {message.author.name}**, o `ID` fornecido pertence ao bot `{usuario}` no qual **ELE NÃO É SEU**. ")
                                     
-                                elif usuario.bot == True:
-                                    p = await author.send("<:Clyde:510894094877327360> **|** **Diga-nos agora o prefixo do seu BOT:** `2 minutos` `(máximo 8 caracteres)`")
-                                        
-                                    try:
-                                        prefix = await client.wait_for('message', check=lambda message: message.author == author, timeout=120)
-                                        await p.delete()
+                                    await asyncio.sleep(20)
+                                    await ex.delete()
+                                else:
 
-                                        if prefix.content == prefix.content:
-                                            if len(prefix.content) +1 >= 8:
-                                                error = await author.send(f"<:incorreto:510894050103263245> **|** **{message.author.name}**, o **prefixo** que você **forneceu execedeu** o **limite máximo**`(8)` e por isso a **ação** foi **cancelada**.")
-                                                        
-                                                await asyncio.sleep(20)
-                                                await error.delete()
+                                    if usuario.bot == False:
+                                        erro = await author.send(f"<:incorreto:510894050103263245> **|** **{message.author.name}**, o `ID` que você forneceu **não corresponde** a de um **BOT** e por isso a **ação** foi **cancelada**.")
                                             
-                                            else:
-                                                b = await author.send("<:DiscordDev:507925579245551616> **|** **Diga-nos agora a biblioteca que foi usada para desenvolver seu BOT:** `2 minutos`\n`Por exemplo: Discord.py, Discord.js, Eris, DiscordGo, Discord.Net, JDA, Discord-rs, Outros.`")
-                                                        
-                                                try:
-                                                    lang = await client.wait_for('message', check=lambda message: message.author == author, timeout=120)
-                                                    await b.delete()
-                                                    if lang.content == "Outros":
-                                                        out1 = await author.send("<:DiscordDev:507925579245551616> **|** **Diga-nos o nome da biblioteca que você usou no desenvolvimento de seu BOT:** `2 minutos`")
-                                                        try:
-                                                            out = await client.wait_for('message', check=lambda message: message.author == author, timeout=120)
-                                                            await out1.delete()
-                                                            if out.content == out.content:
-                                                                await author.send(f"<:correto:510894022861127680> | **{message.author.name}**, você completou todo **processo** para **adicionar** o bot `{usuario}` em **nosso servidor**.\n**OBS:** O formulário passará para um supervisor para avaliação.")
-                                                                
-                                                                logs = client.get_channel(507498277097177098)
-                                                                await logs.send(f"<:correto:510894022861127680> | {message.author.mention} **enviou** o bot `{usuario}` para ser **adicionado** em **nosso servidor**.")
-                                                        
-                                                                pendenteEm = discord.Embed(
-                                                                    colour=cor,
-                                                                    description=f"**[TIPO]**: `Solicitação ADDBOT`\u200b",
-                                                                    timestamp = datetime.datetime.utcnow()
-                                                                ).set_author(
-                                                                    name=str(usuario),
-                                                                    icon_url=usuario.avatar_url
-                                                                ).set_footer(
-                                                                    text=f"ID: {usuario.id}"
-                                                                ).set_thumbnail(
-                                                                    url=usuario.avatar_url
-                                                                ).add_field(
-                                                                    name='📆 `| Criado em`',
-                                                                    value=usuario.created_at.strftime('%d/%m/%y (%H:%M)')
-                                                                ).add_field(
-                                                                    name="<:DiscordDev:507925579245551616> `| Biblioteca`",
-                                                                    value=out.content
-                                                                ).add_field(
-                                                                    name='<:parceiro:510894109758586901> `| Dono`',
-                                                                    value=f"**{message.author}**\n`{message.author.id}`"
-                                                                ).add_field(
-                                                                    name='<:Clyde:510894094877327360> `| Prefixo`',
-                                                                    value=prefix.content
-                                                                ).add_field(
-                                                                    name='📋 `| Descrição`',
-                                                                    value="```Nenhuma```"
-                                                                ).add_field(
-                                                                    name='🚀 `| Convite`',
-                                                                    value=f"[link](https://discordapp.com/oauth2/authorize?client_id={usuario.id}&scope=bot&permissions=)"
-                                                                )
+                                        await asyncio.sleep(20)
+                                        await erro.delete()
+                                        return
+                                        
+                                    elif usuario.bot == True:
+                                        p = await author.send("<:Clyde:510894094877327360> **|** **Diga-nos agora o prefixo do seu BOT:** `2 minutos` `(máximo 8 caracteres)`")
+                                            
+                                        try:
+                                            prefix = await client.wait_for('message', check=lambda message: message.author == author, timeout=120)
+                                            await p.delete()
 
-                                                                await client.get_channel(507570211499671576).send(embed=pendenteEm)                              
-                                                        
-                                                        except asyncio.TimeoutError:
-                                                            await out1.delete()
-
-                                                    elif lang.content == lang.content:
-                                                        await author.send(f"<:correto:510894022861127680> **|** **{message.author.name}**, você completou todo **processo** para **adicionar** o bot `{usuario}` em **nosso servidor**.\n**OBS:** O formulário passará para um supervisor para avaliação.")
-
-                                                        logs = client.get_channel(507498277097177098)
-                                                        await logs.send(f"<:correto:510894022861127680> | {message.author.mention} **enviou** o bot `{usuario}` para ser **adicionado** em **nosso servidor**.")
-
-                                                        pendenteEm = discord.Embed(
-                                                            colour=cor,
-                                                            description=f"**[TIPO]**: `Solicitação BOT`\u200b",
-                                                            timestamp = datetime.datetime.utcnow()
-                                                        ).set_author(
-                                                            name=str(usuario),
-                                                            icon_url=usuario.avatar_url
-                                                        ).set_footer(
-                                                            text=f"ID: {usuario.id}"
-                                                        ).set_thumbnail(
-                                                            url=usuario.avatar_url
-                                                        ).add_field(
-                                                            name='📆 `| Criado em`',
-                                                            value=usuario.created_at.strftime('%d/%m/%y (%H:%M)')
-                                                        ).add_field(
-                                                            name="<:DiscordDev:507925579245551616> `| Biblioteca`",
-                                                            value=lang.content
-                                                        ).add_field(
-                                                            name='<:parceiro:510894109758586901> `| Dono`',
-                                                            value=f"**{message.author}**\n`{message.author.id}`"
-                                                        ).add_field(
-                                                            name='<:Clyde:510894094877327360> `| Prefixo`',
-                                                            value=prefix.content
-                                                        ).add_field(
-                                                            name='📋 `| Descrição`',
-                                                            value="```Nenhuma```"
-                                                        ).add_field(
-                                                            name='🚀 `| Convite`',
-                                                            value=f"[link](https://discordapp.com/oauth2/authorize?client_id={usuario.id}&scope=bot&permissions=)"
-                                                        )
-
-                                                        await client.get_channel(507570211499671576).send(embed=pendenteEm)  
-
-
-                                                except asyncio.TimeoutError:
+                                            if prefix.content == prefix.content:
+                                                if len(prefix.content) +1 >= 8:
+                                                    error = await author.send(f"<:incorreto:510894050103263245> **|** **{message.author.name}**, o **prefixo** que você **forneceu execedeu** o **limite máximo**`(8)` e por isso a **ação** foi **cancelada**.")
                                                             
-                                                    await b.delete()
+                                                    await asyncio.sleep(20)
+                                                    await error.delete()
+                                                
+                                                else:
+                                                    b = await author.send("<:DiscordDev:507925579245551616> **|** **Diga-nos agora a biblioteca que foi usada para desenvolver seu BOT:** `2 minutos`\n`Por exemplo: Discord.py, Discord.js, Eris, DiscordGo, Discord.Net, JDA, Discord-rs, Outros.`")
+                                                            
+                                                    try:
+                                                        lang = await client.wait_for('message', check=lambda message: message.author == author, timeout=120)
+                                                        await b.delete()
+                                                        if lang.content == "Outros":
+                                                            out1 = await author.send("<:DiscordDev:507925579245551616> **|** **Diga-nos o nome da biblioteca que você usou no desenvolvimento de seu BOT:** `2 minutos`")
+                                                            try:
+                                                                out = await client.wait_for('message', check=lambda message: message.author == author, timeout=120)
+                                                                await out1.delete()
+                                                                if out.content == out.content:
+                                                                    await author.send(f"<:correto:510894022861127680> | **{message.author.name}**, você completou todo **processo** para **adicionar** o bot `{usuario}` em **nosso servidor**.\n**OBS:** O formulário passará para um supervisor para avaliação.")
+                                                                    
+                                                                    logs = client.get_channel(507498277097177098)
+                                                                    await logs.send(f"<:correto:510894022861127680> | {message.author.mention} **enviou** o bot `{usuario}` para ser **adicionado** em **nosso servidor**.")
+                                                            
+                                                                    pendenteEm = discord.Embed(
+                                                                        colour=cor,
+                                                                        description=f"**[TIPO]**: `Solicitação ADDBOT`\u200b",
+                                                                        timestamp = datetime.datetime.utcnow()
+                                                                    ).set_author(
+                                                                        name=str(usuario),
+                                                                        icon_url=usuario.avatar_url
+                                                                    ).set_footer(
+                                                                        text=f"ID: {usuario.id}"
+                                                                    ).set_thumbnail(
+                                                                        url=usuario.avatar_url
+                                                                    ).add_field(
+                                                                        name='📆 `| Criado em`',
+                                                                        value=usuario.created_at.strftime('%d/%m/%y (%H:%M)')
+                                                                    ).add_field(
+                                                                        name="<:DiscordDev:507925579245551616> `| Biblioteca`",
+                                                                        value=out.content
+                                                                    ).add_field(
+                                                                        name='<:parceiro:510894109758586901> `| Dono`',
+                                                                        value=f"**{message.author}**\n`{message.author.id}`"
+                                                                    ).add_field(
+                                                                        name='<:Clyde:510894094877327360> `| Prefixo`',
+                                                                        value=prefix.content
+                                                                    ).add_field(
+                                                                        name='📋 `| Descrição`',
+                                                                        value="```Nenhuma```"
+                                                                    ).add_field(
+                                                                        name='🚀 `| Convite`',
+                                                                        value=f"[link](https://discordapp.com/oauth2/authorize?client_id={usuario.id}&scope=bot&permissions=)"
+                                                                    )
+
+                                                                    await client.get_channel(507570211499671576).send(embed=pendenteEm)                              
+                                                            
+                                                            except asyncio.TimeoutError:
+                                                                await out1.delete()
+
+                                                        elif lang.content == lang.content:
+                                                            await author.send(f"<:correto:510894022861127680> **|** **{message.author.name}**, você completou todo **processo** para **adicionar** o bot `{usuario}` em **nosso servidor**.\n**OBS:** O formulário passará para um supervisor para avaliação.")
+
+                                                            logs = client.get_channel(507498277097177098)
+                                                            await logs.send(f"<:correto:510894022861127680> | {message.author.mention} **enviou** o bot `{usuario}` para ser **adicionado** em **nosso servidor**.")
+
+                                                            pendenteEm = discord.Embed(
+                                                                colour=cor,
+                                                                description=f"**[TIPO]**: `Solicitação BOT`\u200b",
+                                                                timestamp = datetime.datetime.utcnow()
+                                                            ).set_author(
+                                                                name=str(usuario),
+                                                                icon_url=usuario.avatar_url
+                                                            ).set_footer(
+                                                                text=f"ID: {usuario.id}"
+                                                            ).set_thumbnail(
+                                                                url=usuario.avatar_url
+                                                            ).add_field(
+                                                                name='📆 `| Criado em`',
+                                                                value=usuario.created_at.strftime('%d/%m/%y (%H:%M)')
+                                                            ).add_field(
+                                                                name="<:DiscordDev:507925579245551616> `| Biblioteca`",
+                                                                value=lang.content
+                                                            ).add_field(
+                                                                name='<:parceiro:510894109758586901> `| Dono`',
+                                                                value=f"**{message.author}**\n`{message.author.id}`"
+                                                            ).add_field(
+                                                                name='<:Clyde:510894094877327360> `| Prefixo`',
+                                                                value=prefix.content
+                                                            ).add_field(
+                                                                name='📋 `| Descrição`',
+                                                                value="```Nenhuma```"
+                                                            ).add_field(
+                                                                name='🚀 `| Convite`',
+                                                                value=f"[link](https://discordapp.com/oauth2/authorize?client_id={usuario.id}&scope=bot&permissions=)"
+                                                            )
+
+                                                            await client.get_channel(507570211499671576).send(embed=pendenteEm)  
 
 
-                                    except asyncio.TimeoutError:
-                                        await p.delete()
+                                                    except asyncio.TimeoutError:
+                                                                
+                                                        await b.delete()
 
-                        except:
-                            await author.send(f"<:incorreto:510894050103263245> | **{message.author.name}**, você pode apenas digitar um `ID` de um bot válido.")         
+
+                                        except asyncio.TimeoutError:
+                                            await p.delete()
+
+                            except:
+                                await author.send(f"<:incorreto:510894050103263245> | **{message.author.name}**, você pode apenas digitar um `ID` de um bot válido.")         
+                        
+                    else:
+                        return
                     
-                else:
-                    return
-                    
-            except asyncio.TimeoutError:
-                await msg.delete()
+                except asyncio.TimeoutError:
+                    await msg.delete()
             
         except IndexError:
             await author.send(f"**{message.author.name}, para iniciar o processo precisamos que você libere suas mensagens privadas.**")
