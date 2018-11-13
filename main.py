@@ -274,7 +274,8 @@ async def on_message(message):
                     
                 except asyncio.TimeoutError:
                     await msg.delete()
-            
+            else:
+                return
         except IndexError:
             await author.send(f"**{message.author.name}, para iniciar o processo precisamos que você libere suas mensagens privadas.**")
 
