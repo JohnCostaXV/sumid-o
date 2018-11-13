@@ -114,7 +114,7 @@ async def on_message(message):
 
     if message.content.lower().startswith("d.addbot"):
         try:
-            if message.guild == 498011182620475412:
+            if message.guild.id == 498011182620475412:
                 server = message.channel
                 new = client.get_guild(498011182620475412)
                 if message.author not in new.members:
