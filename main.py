@@ -32,9 +32,35 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    if message.content.lower().startswith("d.ligar"):
+        try:
+            membro = message.mentions[0]
+
+            ligando = f"Ligando para {membro.mention}!\n\n`Tocando... Tocando...`"
+            await message.channel.send(ligando)
+
+            embed = discord.Embed(
+                title="Nova ligação",
+                color=cor,
+                description=f"Ligação de {message.author.name}.\n\nPara atender digite `d.atender @{message.author.name}`"
+            )
+            embed.set_thumbnail(url=message.author.avatar_url)
+            
+
+        except:
+            pass
+
     if message.content.lower().startswith("d.webabraçar"):
         try:
             membro = message.mentions[0]
+            if message.author == membro:
+                abraço = ["https://akns-images.eonline.com/eol_images/Entire_Site/201398/rs_500x242-131008045420-justin-bieber-gifs1.gif?fit=inside|900:auto&output-quality=90"]
+                embed = discord.Embed(
+                    color=cor
+                )
+                embed.set_image(url=abraço)
+                await message.channel.send(f"{message.author.mention} talvez um abraço a si mesmo seja bom, as vezes.", embed=embed)
+            
             abraços = ["https://media1.tenor.com/images/3c83525781dc1732171d414077114bc8/tenor.gif?itemid=7830142", "https://media1.tenor.com/images/1069921ddcf38ff722125c8f65401c28/tenor.gif?itemid=11074788", "https://media1.tenor.com/images/7db5f172665f5a64c1a5ebe0fd4cfec8/tenor.gif?itemid=9200935", "http://media1.tenor.com/images/d7529f6003b20f3b21f1c992dffb8617/tenor.gif?itemid=4782499", "http://media1.tenor.com/images/11889c4c994c0634cfcedc8adba9dd6c/tenor.gif?itemid=5634578", "http://media1.tenor.com/images/949d3eb3f689fea42258a88fa171d4fc/tenor.gif?itemid=4900166", "http://media1.tenor.com/images/e58eb2794ff1a12315665c28d5bc3f5e/tenor.gif?itemid=10195705"]
             custom = random.choice(abraços)
 
