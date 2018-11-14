@@ -14,7 +14,6 @@ import datetime
 
 prefix = ["d."]
 cor = 0xffa500
-
 client = commands.Bot(command_prefix=prefix, case_insensitive=True)
 shared = discord.AutoShardedClient(shard_count=2, shard_ids=(1,2))
 client.remove_command("help")
@@ -35,9 +34,8 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content.lower().startswith("d.meinvita"):
-        membro = message.author
-        await membro.send_friend_request()
+    if message.content.lower().startswith("d.invite"):
+        await message.channel.send(f"{message.author.mention}, me adicione em seu servidor!\n- https://discordapp.com/oauth2/authorize?client_id=497012433378869250&permissions=8&scope=bot")
 
     if message.content.lower().startswith("d.webabraçar"):
         try:
@@ -48,8 +46,7 @@ async def on_message(message):
                     color=cor
                 )
                 embed.set_image(url=abraço)
-                await message.channel.send(f"{message.author.mention} talvez um abraço a si mesmo seja bom, as vezes.")
-                await message.channel.send(embed=embed)
+                await message.channel.send(f"{message.author.mention} talvez um abraço a si mesmo seja bom, as vezes.",embed=embed)
                 return
             abraços = ["https://media1.tenor.com/images/3c83525781dc1732171d414077114bc8/tenor.gif?itemid=7830142", "https://media1.tenor.com/images/1069921ddcf38ff722125c8f65401c28/tenor.gif?itemid=11074788", "https://media1.tenor.com/images/7db5f172665f5a64c1a5ebe0fd4cfec8/tenor.gif?itemid=9200935", "http://media1.tenor.com/images/d7529f6003b20f3b21f1c992dffb8617/tenor.gif?itemid=4782499", "http://media1.tenor.com/images/11889c4c994c0634cfcedc8adba9dd6c/tenor.gif?itemid=5634578", "http://media1.tenor.com/images/949d3eb3f689fea42258a88fa171d4fc/tenor.gif?itemid=4900166", "http://media1.tenor.com/images/e58eb2794ff1a12315665c28d5bc3f5e/tenor.gif?itemid=10195705"]
             custom = random.choice(abraços)
@@ -60,7 +57,14 @@ async def on_message(message):
             embed.set_image(url=custom)
             await message.channel.send(f"{message.author.mention} web-abraçou {membro.name}", embed=embed)
         except IndexError:
-            await message.channel.send(f"**{message.author.name}**, você precisa mencionar um usuário para abraçar.")
+            abraço = "https://akns-images.eonline.com/eol_images/Entire_Site/201398/rs_500x242-131008045420-justin-bieber-gifs1.gif"
+            embed = discord.Embed(
+                color=cor
+            )
+            embed.set_image(url=abraço)
+            await message.channel.send(f"{message.author.mention} talvez um abraço a si mesmo seja bom, as vezes.",embed=embed)
+            return
+            
 
 
     if message.content.lower().startswith("d.cor"):
