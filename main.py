@@ -25,7 +25,7 @@ client.remove_command("help")
 async def on_ready():
     print("BOT ONLINE")
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{str(len(set(client.get_all_members())))} seres humanos!"))
-    await asyncio.sleep(10)
+    await asyncio.sleep(300)
     await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{str(len(set(client.guilds)))} servidores!"))
     await asyncio.sleep(300)
 
