@@ -39,11 +39,10 @@ async def on_message(message):
             custom = random.choice(abraços)
 
             embed = discord.Embed(
-                color=cor,
-                description=f"O {message.author.name} web-abraçou {membro.name}!"
+                color=cor
             )
             embed.set_image(url=custom)
-            await message.channel.send(message.author.mention, embed=embed)
+            await message.channel.send(f"{message.author.mention} **web-abraçou {membro.name}**", embed=embed)
         except IndexError:
             await message.channel.send(f"**{message.author.name}**, você precisa mencionar um usuário para abraçar.")
 
