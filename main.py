@@ -54,7 +54,7 @@ async def on_message(message):
         try:
             membro = message.mentions[0]
             if message.author == membro:
-                abraço = ["https://akns-images.eonline.com/eol_images/Entire_Site/201398/rs_500x242-131008045420-justin-bieber-gifs1.gif"]
+                abraço = "https://akns-images.eonline.com/eol_images/Entire_Site/201398/rs_500x242-131008045420-justin-bieber-gifs1.gif"
                 embed = discord.Embed(
                     color=cor
                 )
