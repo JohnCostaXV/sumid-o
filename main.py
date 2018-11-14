@@ -42,7 +42,7 @@ async def on_message(message):
                 color=cor
             )
             embed.set_image(url=custom)
-            await message.channel.send(f"{message.author.mention} **web-abraçou {membro.name}**", embed=embed)
+            await message.channel.send(f"{message.author.mention} web-abraçou {membro.name}", embed=embed)
         except IndexError:
             await message.channel.send(f"**{message.author.name}**, você precisa mencionar um usuário para abraçar.")
 
