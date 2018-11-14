@@ -19,7 +19,10 @@ client = commands.Bot(command_prefix=prefix, case_insensitive=True)
 shared = discord.AutoShardedClient(shard_count=2, shard_ids=(1,2))
 client.remove_command("help")
 
-
+@client.event
+async def on_member_join(member):
+    canal = client.get_channel(508337140103381003)
+    await canal.edit()
 
 @client.event
 async def on_ready():
@@ -32,23 +35,9 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content.lower().startswith("d.ligar"):
-        try:
-            membro = message.mentions[0]
-
-            ligando = f"Ligando para {membro.mention}!\n\n`Tocando... Tocando...`"
-            await message.channel.send(ligando)
-
-            embed = discord.Embed(
-                title="Nova ligação",
-                color=cor,
-                description=f"Ligação de {message.author.name}.\n\nPara atender digite `d.atender @{message.author.name}`"
-            )
-            embed.set_thumbnail(url=message.author.avatar_url)
-            
-
-        except:
-            pass
+    if message.content.lower().startswith("d.meinvita"):
+        membro = message.author
+        await membro.send_friend_request()
 
     if message.content.lower().startswith("d.webabraçar"):
         try:
