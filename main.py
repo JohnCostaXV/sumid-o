@@ -18,22 +18,40 @@ client = commands.Bot(command_prefix=prefix, case_insensitive=True)
 shared = discord.AutoShardedClient(shard_count=2, shard_ids=(1,2))
 client.remove_command("help")
 
-@client.event
-async def on_member_join(member):
-    canal = client.get_channel(508337140103381003)
-    await canal.edit()
 
 @client.event
 async def on_ready():
     print("BOT ONLINE")
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{str(len(set(client.get_all_members())))} seres humanos!"))
-    await asyncio.sleep(300)
-    await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{str(len(set(client.guilds)))} servidores!"))
-    await asyncio.sleep(300)
-
+    while True:
+        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{str(len(set(client.get_all_members())))} seres humanos!"))
+        await asyncio.sleep(300)
+        await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=f"{str(len(set(client.guilds)))} servidores!"))
+        await asyncio.sleep(300)
 
 @client.event
 async def on_message(message):
+    if message.content.lower().startswith("d.registrar"):
+        url = os.environ.get("url")
+        mongo = MongoClient(url)
+        zephyr_bot = mongo["zephyr_bot"]
+        usuarios = zephyr_bot["usuarios"]
+
+        usuario = {
+            "_id":str(message.author.id),
+            "nome":str(message.author.name),
+            "money":"0",
+            "rep":"0",
+            "sobre":"Nada definido"
+        }
+
+        zephyr_bot.usuarios.insert_one(usuario).inserted_id
+        
+        embed = discord.Embed(
+            description=f"{message.author.name}, você foi registrado e salvo com sucesso em nosso banco de dados!"
+        )
+        await message.channel.send(embed=embed)
+
+
     if message.content.lower().startswith("d.invite"):
         await message.channel.send(f"{message.author.mention}, me adicione em seu servidor!\n- https://discordapp.com/oauth2/authorize?client_id=497012433378869250&permissions=8&scope=bot")
 
