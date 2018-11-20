@@ -313,8 +313,7 @@ async def on_message(message):
 
     if message.content.lower().startswith("d.aceitarbot"):
         try:
-            id_ = message.content.split(" ")
-            usuario = await client.get_user_info(int(str(" ".join(id_[1]))))
+            usuario = await client.get_user_info(int(str(message.content.split(" "))))
             if usuario in message.guild.members:
                 ex = await author.send(f"<:incorreto:510894050103263245> **| {message.author.name}**, o `ID` fornecido pertence ao bot `{usuario}` no qual ele **já foi aceito**.")
                                         
