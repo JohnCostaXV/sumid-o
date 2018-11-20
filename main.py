@@ -30,30 +30,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content.lower().startswith("d.registrar"):
-        url = os.environ.get("url")
-        mongo = MongoClient(url)
-        zephyr_bot = mongo["zephyr_bot"]
-        usuarios = zephyr_bot["usuarios"]
-
-        usuario = {
-            "_id":str(message.author.id),
-            "nome":str(message.author.name),
-            "money":"0",
-            "rep":"0",
-            "sobre":"Nada definido"
-        }
-
-        zephyr_bot.usuarios.insert_one(usuario).inserted_id
-        
-        embed = discord.Embed(
-            description=f"{message.author.name}, você foi registrado e salvo com sucesso em nosso banco de dados!"
-        )
-        await message.channel.send(embed=embed)
-
-
-    if message.content.lower().startswith("d.invite"):
-        await message.channel.send(f"{message.author.mention}, me adicione em seu servidor!\n- https://discordapp.com/oauth2/authorize?client_id=497012433378869250&permissions=8&scope=bot")
+    
 
     if message.content.lower().startswith("d.webabraçar"):
         try:
@@ -333,8 +310,5 @@ async def on_message(message):
                 return
         except IndexError:
             await author.send(f"**{message.author.name}, para iniciar o processo precisamos que você libere suas mensagens privadas.**")
-
-
-
 
 client.run(os.environ.get("token"))
