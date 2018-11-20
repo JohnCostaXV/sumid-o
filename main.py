@@ -334,8 +334,9 @@ async def on_message(message):
         
         except IndexError:
             await message.channel.send(f"<:incorreto:510894050103263245> | **{message.author.name}**, você precisa citar o `ID` do bot que deseja aceitar.")
-        except:
-            await message.channel.send(f"<:incorreto:510894050103263245> | **{message.author.name}**, você pode apenas citar um `ID` de um bot válido.")         
+        except Exception as e:
+            await message.channel.send(e)
+            #await message.channel.send(f"<:incorreto:510894050103263245> | **{message.author.name}**, você pode apenas citar um `ID` de um bot válido.")         
         finally:
             pass
 
