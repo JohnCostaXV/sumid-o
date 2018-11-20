@@ -317,7 +317,7 @@ async def on_message(message):
             resposta = " ".join(args[1:])
             usuario = await client.get_user_info(int(resposta))
             if usuario in message.guild.members:
-                ex = await author.send(f"<:incorreto:510894050103263245> **| {message.author.name}**, o `ID` fornecido pertence ao bot `{usuario}` no qual ele **já foi aceito**.")
+                ex = await message.channel.send(f"<:incorreto:510894050103263245> **| {message.author.name}**, o `ID` fornecido pertence ao bot `{usuario}` no qual ele **já foi aceito**.")
                                         
                 await asyncio.sleep(20)
                 await ex.delete()
