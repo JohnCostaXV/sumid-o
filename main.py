@@ -332,13 +332,8 @@ async def on_message(message):
                     canal = client.get_channel(507498277097177098)
                     await canal.send(f"<:correto:510894022861127680> | O bot `{usuario}` foi **aceito** pelo **{message.author.name}** em **nosso servidor**.")
         
-        except IndexError:
-            await message.channel.send(f"<:incorreto:510894050103263245> | **{message.author.name}**, você precisa citar o `ID` do bot que deseja aceitar.")
         except Exception as e:
-            await message.channel.send(e)
-            #await message.channel.send(f"<:incorreto:510894050103263245> | **{message.author.name}**, você pode apenas citar um `ID` de um bot válido.")         
-        finally:
-            pass
+            await message.channel.send(f"`{e}`")
 
 
 client.run(os.environ.get("token"))
