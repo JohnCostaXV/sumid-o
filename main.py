@@ -117,7 +117,6 @@ async def on_message(message):
         url1 = requests.get('https://i.imgur.com/VlvM1Au.png')
         fundo = Image.open(BytesIO(url1.content))
         avatar = Image.open(BytesIO(url.content))
-        #                  largura x altura
         avatar = avatar.resize((325, 375));
         avatar.save('suafoto.png')    
 
