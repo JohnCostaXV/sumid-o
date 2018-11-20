@@ -315,7 +315,7 @@ async def on_message(message):
         try:
             args = message.content.split(" ")
             resposta = " ".join(args[1:])
-            if args == None:
+            if resposta == None:
                 await message.channel.send(f"<:incorreto:510894050103263245> | **{message.author.name}**, você precisa apenas citar o `ID` do bot que deseja **aceitar**.")
             else:            
                 usuario = await client.get_user_info(int(resposta))
