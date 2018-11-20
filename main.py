@@ -317,7 +317,7 @@ async def on_message(message):
             resposta = " ".join(args[1:])
             usuario = await client.get_user_info(int(resposta))
             if usuario in message.guild.members:
-                ex = await message.channel.send(f"<:incorreto:510894050103263245> **| {message.author.name}**, o `ID` fornecido pertence ao bot `{usuario}` no qual ele **já foi aceito**.")
+                ex = await message.channel.send(f"<:incorreto:510894050103263245> **| {message.author.name}**, o `ID` fornecido pertence ao bot `{usuario}` no qual ele **já está no servidor**.")
                                         
                 await asyncio.sleep(20)
                 await ex.delete()
@@ -328,12 +328,14 @@ async def on_message(message):
                     await erro.delete()
                     return
                 elif usuario.bot == True:
-                    await message.channel.send(f"<:correto:510894022861127680> | O bot foi aceito e adicionado ao servidor.")
+                    await message.channel.send(f"<:correto:510894022861127680> | `{usuario}` foi **aceito** e **adicionado** ao servidor com **sucesso**.")
                     canal = client.get_channel(507498277097177098)
                     await canal.send(f"<:correto:510894022861127680> | O bot `{usuario}` foi **aceito** pelo **{message.author.name}** em **nosso servidor**.")
         
-        except Exception as e:
-            await message.channel.send(f"`{e}`")
+        except IndexError:
+            await message.channel.send(f"<:incorreto:510894050103263245> | **{message.author.name}**, você precisa apenas citar o `ID` do bot que deseja **aceitar**.")
+        except:
+            await message.channel.send(f"<:incorreto:510894050103263245> | **{message.author.name}**, você pode apenas citar um `ID` de um bot válido.")
 
 
 client.run(os.environ.get("token"))
