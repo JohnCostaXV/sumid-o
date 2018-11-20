@@ -317,7 +317,7 @@ async def on_message(message):
             resposta = " ".join(args[1:])         
             usuario = await client.get_user_info(int(resposta))
             if usuario.id == 497012433378869250:
-                return await message.channel.send(f"<:incorreto:510894050103263245> **| {message.author.name}**, o `ID` fornecido pertence a mim bobinho.")
+                return await message.channel.send(f"<:incorreto:510894050103263245> **| {message.author.name}**, o `ID` fornecido pertence ao bot `{usuario}` no qual ela **sou eu bobinho**.")
 
             if usuario in message.guild.members:
                 ex = await message.channel.send(f"<:incorreto:510894050103263245> **| {message.author.name}**, o `ID` fornecido pertence ao bot `{usuario}` no qual ele **já está no servidor**.")
