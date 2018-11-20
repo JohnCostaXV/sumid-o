@@ -311,4 +311,32 @@ async def on_message(message):
         except IndexError:
             await author.send(f"**{message.author.name}, para iniciar o processo precisamos que você libere suas mensagens privadas.**")
 
+    if message.content.lower().startswith("d.aceitarbot"):
+        try:
+            id_ = message.content.split(" ")
+            usuario = await client.get_user_info(int(str(" ".join(id_[1]))))
+            if usuario in message.guild.members:
+                ex = await author.send(f"<:incorreto:510894050103263245> **| {message.author.name}**, o `ID` fornecido pertence ao bot `{usuario}` no qual ele **já foi aceito**.")
+                                        
+                await asyncio.sleep(20)
+                await ex.delete()
+            else:
+                if usuario.bot == False:
+                    erro = await message.channel.send(f"<:incorreto:510894050103263245> **|** **{message.author.name}**, o `ID` que você forneceu **não corresponde** a de um **BOT**.")
+                    await asyncio.sleep(20)
+                    await erro.delete()
+                    return
+                elif usuario.bot == True:
+                    await message.channel.send(f"<:correto:510894022861127680> | O bot foi aceito e adicionado ao servidor.")
+                    canal = client.get_channel(507498277097177098)
+                    await canal.send(f"<:correto:510894022861127680> | O bot `{usuario}` foi **aceito** pelo **{message.author.name}** em **nosso servidor**.")
+        
+        except IndexError:
+            await message.channel.send(f"<:incorreto:510894050103263245> | **{message.author.name}**, você precisa citar o `ID` do bot que deseja aceitar.")
+        except:
+            await message.channel.send(f"<:incorreto:510894050103263245> | **{message.author.name}**, você pode apenas citar um `ID` de um bot válido.")         
+        finally:
+            pass
+
+
 client.run(os.environ.get("token"))
