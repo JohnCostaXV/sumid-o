@@ -12,6 +12,7 @@ import time
 import os
 import datetime
 
+forms = []
 prefix = ["d."]
 cor = 0xffa500
 client = commands.Bot(command_prefix=prefix, case_insensitive=True)
@@ -150,7 +151,9 @@ async def on_message(message):
                 new = client.get_guild(498011182620475412)
                 if message.author not in new.members:
                     return await message.channel.send(f"<:incorreto:510894050103263245> **| {message.author.name}**, você precisa ser membro do servidor **`New Dev's`** para cadastrar seu bot.\n**CONVITE:** `https://discord.me/NewDevs`")
-                
+                if message.author.id in forms:
+                    return await message.channel.send(f"<:incorreto:510894050103263245> **| {message.author.name}**, ainda existe um formulário sendo executado em seu privado.", delete_after=30)
+
                 if message.author.bot:
                     return await message.channel.send("<:incorreto:510894050103263245> **|** BOTs não tem podem executar este comando!")
 
@@ -160,6 +163,7 @@ async def on_message(message):
                 
 
                 msg = await author.send("<:parceiro:510894109758586901> **|** **Então você quer adicionar o seu bot em nosso servidor?**\nPara isso precisamos que você preencha um pequeno formulário para cadastramento de seu BOT em nosso sistema e discord.\n\n<:bot:437248340724416514> **|** **Insira o `ID` do bot que deseja adicionar:** `2 minutos`")
+                forms.append(message.author.id)
                 try:
                     if message.author is not server:
                         def check(m):
@@ -172,6 +176,7 @@ async def on_message(message):
                                 try:
                                     usuario = await client.get_user_info(int(str(idbot.content)))
                                     if usuario in message.guild.members:
+                                        forms.remove(message.author.id)
                                         ex = await author.send(f"<:incorreto:510894050103263245> **| {message.author.name}**, o `ID` fornecido pertence ao bot `{usuario}` no qual **ELE NÃO É SEU**. ")
                                         
                                         await asyncio.sleep(20)
@@ -179,8 +184,9 @@ async def on_message(message):
                                     else:
 
                                         if usuario.bot == False:
+                                            forms.remove(message.author.id)
                                             erro = await author.send(f"<:incorreto:510894050103263245> **|** **{message.author.name}**, o `ID` que você forneceu **não corresponde** a de um **BOT** e por isso a **ação** foi **cancelada**.")
-                                                
+                                            
                                             await asyncio.sleep(20)
                                             await erro.delete()
                                             return
@@ -196,6 +202,7 @@ async def on_message(message):
 
                                                 if prefix.content == prefix.content:
                                                     if len(prefix.content) +1 >= 8:
+                                                        forms.remove(message.author.id)
                                                         error = await author.send(f"<:incorreto:510894050103263245> **|** **{message.author.name}**, o **prefixo** que você **forneceu execedeu** o **limite máximo**`(8)` e por isso a **ação** foi **cancelada**.")
                                                                 
                                                         await asyncio.sleep(20)
@@ -252,7 +259,7 @@ async def on_message(message):
                                                                             name='🚀 `| Convite`',
                                                                             value=f"[link](https://discordapp.com/oauth2/authorize?client_id={usuario.id}&scope=bot&permissions=)"
                                                                         )
-
+                                                                        forms.remove(message.author.id)
                                                                         await client.get_channel(507570211499671576).send(embed=pendenteEm)                              
                                                                 
                                                                 except asyncio.TimeoutError:
@@ -294,26 +301,31 @@ async def on_message(message):
                                                                     name='🚀 `| Convite`',
                                                                     value=f"[link](https://discordapp.com/oauth2/authorize?client_id={usuario.id}&scope=bot&permissions=)"
                                                                 )
-
+                                                                forms.remove(message.author.id)
                                                                 await client.get_channel(507570211499671576).send(embed=pendenteEm)  
 
 
                                                         except asyncio.TimeoutError:
-                                                                    
+                                                            forms.remove(message.author.id)
                                                             await b.delete()
 
 
                                             except asyncio.TimeoutError:
+                                                forms.remove(message.author.id)
                                                 await p.delete()
 
                                 except:
+                                    forms.remove(message.author.id)
                                     await author.send(f"<:incorreto:510894050103263245> | **{message.author.name}**, você pode apenas digitar um `ID` de um bot válido.")         
                         except asyncio.TimeoutError:
+                            forms.remove(message.author.id)
                             await msg.delete()   
 
                     else:
+                        forms.remove(message.author.id)
                         return
                 except Exception as e:
+                    forms.remove(message.author.id)
                     print(e)    
             else:
                 return
