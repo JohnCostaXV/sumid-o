@@ -29,8 +29,7 @@ async def on_ready():
         await asyncio.sleep(300)
 
 @client.event
-async def on_message(message):
-    
+async def on_message(message):   
 
     if message.content.lower().startswith("d.webabraçar"):
         try:
@@ -311,32 +310,22 @@ async def on_message(message):
         except IndexError:
             await author.send(f"**{message.author.name}, para iniciar o processo precisamos que você libere suas mensagens privadas.**")
 
-    if message.content.lower().startswith("d.aceitarbot"):
+    if message.content.lower().startswith("d.testepv"):
+        user = message.author
+        await message.author.send("Responda: `teste`")
         try:
-            args = message.content.split(" ")
-            resposta = " ".join(args[1:])         
-            usuario = await client.get_user_info(int(resposta))
-            if usuario.id == 497012433378869250:
-                return await message.channel.send(f"<:incorreto:510894050103263245> **| {message.author.name}**, o `ID` fornecido pertence ao bot `{usuario}` no qual ela **sou eu bobinho**.")
+            def check(m):
+                return m.channel.id == user.id and m.author == user
 
-            if usuario in message.guild.members:
-                ex = await message.channel.send(f"<:incorreto:510894050103263245> **| {message.author.name}**, o `ID` fornecido pertence ao bot `{usuario}` no qual ele **já está no servidor**.")
-                                            
-                await asyncio.sleep(20)
-                await ex.delete()
-            else:
-                if usuario.bot == False:
-                    erro = await message.channel.send(f"<:incorreto:510894050103263245> **|** **{message.author.name}**, o `ID` que você forneceu **não corresponde** a de um **BOT**.")
-                    await asyncio.sleep(20)
-                    await erro.delete()
-                    return
-                elif usuario.bot == True:
-                    await message.channel.send(f"<:correto:510894022861127680> | `{usuario}` foi **aceito** e **adicionado** ao servidor com **sucesso**.")
-                    canal = client.get_channel(507498277097177098)
-                    await canal.send(f"<:correto:510894022861127680> | O bot `{usuario}` foi **aceito** pelo **{message.author.name}** em **nosso servidor**.")
-        
-        except:
-            await message.channel.send(f"<:incorreto:510894050103263245> | **{message.author.name}**, você pode apenas citar um `ID` de um bot válido.")
+            try:
+                resposta = await client.wait_for("message", check=check, timeout=120)
+            except asyncio.TimeoutError:
+                await message.channel.send("esgotado")
+
+            await message.channel.send(resposta.content)
+        except Exception as e:
+            await message.author.send(f'{e}')
+
 
 
 client.run(os.environ.get("token"))
