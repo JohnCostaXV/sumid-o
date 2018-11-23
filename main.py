@@ -163,7 +163,7 @@ async def on_message(message):
                 try:
                     if message.author is not server:
                         def check(m):
-                            return m.author == message.author and m.channel.id == m_id.channel.id
+                            return m.author == message.author and m.channel.id == msg.channel.id
                         try:
                             idbot = await client.wait_for('message', check=check, timeout=120)
                         
@@ -188,7 +188,7 @@ async def on_message(message):
                                         elif usuario.bot == True:
                                             p = await author.send("<:Clyde:510894094877327360> **|** **Diga-nos agora o prefixo do seu BOT:** `2 minutos` `(máximo 8 caracteres)`")
                                             def check(m):
-                                                return m.author == message.author and m.channel.id == m_id.channel.id
+                                                return m.author == message.author and m.channel.id == p.channel.id
 
                                             try:
                                                 prefix = await client.wait_for('message', check=check, timeout=120)
@@ -204,7 +204,7 @@ async def on_message(message):
                                                     else:
                                                         b = await author.send("<:DiscordDev:507925579245551616> **|** **Diga-nos agora a biblioteca que foi usada para desenvolver seu BOT:** `2 minutos`\n`Por exemplo: Discord.py, Discord.js, Eris, DiscordGo, Discord.Net, JDA, Discord-rs, Outros.`")
                                                         def check(m):
-                                                            return m.author == message.author and m.channel.id == m_id.channel.id
+                                                            return m.author == message.author and m.channel.id == b.channel.id
 
                                                         try:
                                                             lang = await client.wait_for('message', check=check, timeout=120)
@@ -212,7 +212,7 @@ async def on_message(message):
                                                             if lang.content == "Outros":
                                                                 out1 = await author.send("<:DiscordDev:507925579245551616> **|** **Diga-nos o nome da biblioteca que você usou no desenvolvimento de seu BOT:** `2 minutos`")
                                                                 def check(m):
-                                                                    return m.author == message.author and m.channel.id == m_id.channel.id
+                                                                    return m.author == message.author and m.channel.id == lang.channel.id
                                                                 try:
                                                                     out = await client.wait_for('message', check=check, timeout=120)
                                                                     await out1.delete()
@@ -320,21 +320,6 @@ async def on_message(message):
         except discord.Forbidden:
             await author.send(f"**{message.author.name}, para iniciar o processo precisamos que você libere suas mensagens privadas.**")
 
-    if message.content.lower().startswith("d.testepv"):
-        m_id = await message.author.send("Responda: `teste`")
-        try:
-            def check(m):
-                return m.author == message.author and m.channel.id == m_id.channel.id
-
-            try:
-                resposta = await client.wait_for("message", check=check, timeout=20)
-
-            except asyncio.TimeoutError:
-                await message.author.send("esgotado")
-
-            await message.channel.send(resposta.content)
-        except Exception as e:
-            await message.author.send(f'{e}')
 
 
 
