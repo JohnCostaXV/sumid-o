@@ -31,14 +31,6 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.channel.id != 512629173668413460:
-        return
-    try:
-        #message = message.content
-        await message.add_reaction(":correto:515523764297924618")
-        await message.add_reaction(":incorreto:515523818358571039")
-    except:
-        pass
 
     if message.content.lower().startswith("d.webabraçar"):
         try:
@@ -343,7 +335,14 @@ async def on_message(message):
         except discord.Forbidden:
             await author.send(f"**{message.author.name}, para iniciar o processo precisamos que você libere suas mensagens privadas.**")
 
-
+    if message.channel.id != 512629173668413460:
+        return
+    try:
+        #message = message.content
+        await message.add_reaction(":correto:515523764297924618")
+        await message.add_reaction(":incorreto:515523818358571039")
+    except:
+        pass
 
 
 client.run(os.environ.get("token"))
