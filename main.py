@@ -35,8 +35,8 @@ async def on_message(message):
         return
     try:
         #message = message.content
-        await message.add_reaction(":correto:510894022861127680")
-        await message.add_reaction(":incorreto:510894050103263245")
+        await message.add_reaction(":Ativado:514076459799805954")
+        await message.add_reaction(":Desativado:514076460118573066")
     except:
         pass
 
