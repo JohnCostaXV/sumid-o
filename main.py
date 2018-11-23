@@ -319,10 +319,11 @@ async def on_message(message):
 
             try:
                 resposta = await client.wait_for("message", check=check, timeout=120)
-            except asyncio.TimeoutError:
-                await message.channel.send("esgotado")
+                await message.channel.send(resposta.content)
 
-            await message.channel.send(resposta.content)
+            except asyncio.TimeoutError:
+                await message.author.send("esgotado")
+
         except Exception as e:
             await message.author.send(f'{e}')
 
