@@ -339,6 +339,33 @@ async def on_message(message):
                                                                 msg = await client.get_channel(507570211499671576).send(embed=pendenteEm)  
                                                                 await msg.add_reaction(":correto:515523764297924618")
                                                                 await msg.add_reaction(":incorreto:515523818358571039")
+                                                                def opt_check(reaction, user):
+                                                                    return reaction.message.id == msg.id and user == None and str(reaction.emoji) in ':correto:515523764297924618', ':incorreto:515523818358571039' 
+                                                                            
+                                                                try:
+                                                                    reaction, user = await client.wait_for("reaction_add", check=opt_check, timeout=172800)
+                                                                        
+                                                                    if str(reaction.emoji) == ':correto:515523764297924618':
+                                                                        await logs.send(f"<:correto:510894022861127680> | {message.author.mention}, seu bot `{usuario}` foi **aceito** pelo **{user.name}**.")
+                                                                        await author.send(f"<:correto:510894022861127680> | O seu bot `{usuario}` foi **aceito** pelo **{user.name}**;")
+
+                                                                    elif str(reaction.emoji) == ':incorreto:515523818358571039':
+                                                                        mtv1 = await client.get_channel(507570211499671576).send(f"{user.mention}, diga o motivo para **recusar** o bot `{usuario}`: `(2 minutos)`")
+                                                                        try:
+                                                                            mtv = await client.wait_for('message', check=lambda message: user == user, timeout=120)
+                                                                            if mtv.content == mtv.content:
+                                                                                await mtv1.delete()
+                                                                                await mtv.delete()
+                                                                                await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```{mtv.content}```")
+                                                                                await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```{mtv.content}```")
+                                                                        except asyncio.TimeoutError:
+                                                                            await mtv1.delete()
+                                                                            await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```Nenhum motivo informado```")
+                                                                            await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```Nenhum motivo informado```")
+
+                                                                except asyncio.TimeoutError:
+                                                                    await author.send(f"Olá **{author.name}**, o seu bot `{usuario}` foi automaticamente rejeitado devido se passarem **2 dias** sem resposta, reenvie novamente.")
+                                                                    await msg.clear_reactions()
 
                                                         except asyncio.TimeoutError:
                                                             forms.remove(message.author.id)
