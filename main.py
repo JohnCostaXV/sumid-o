@@ -268,16 +268,16 @@ async def on_message(message):
                                                                         await msg.add_reaction(":correto:515523764297924618")
                                                                         await msg.add_reaction(":incorreto:515523818358571039")
                                                                         def opt_check(reaction, user):
-                                                                            return reaction.message.id == msg.id and user == message.author and str(reaction.emoji) in ':correto:515523764297924618', ':incorreto:515523818358571039' 
+                                                                            return reaction.message.id == msg.id and user == message.author and str(reaction.emoji) in '<:correto:515523764297924618>', '<:incorreto:515523818358571039>' 
                                                                             
                                                                         try:
                                                                             reaction, user = await client.wait_for("reaction_add", check=opt_check, timeout=172800)
                                                                         
-                                                                            if str(reaction.emoji) == ':correto:515523764297924618':
+                                                                            if str(reaction.emoji) == '<:correto:515523764297924618>':
                                                                                 await logs.send(f"<:correto:510894022861127680> | {message.author.mention}, seu bot `{usuario}` foi **aceito** pelo **{user.name}**.")
                                                                                 await author.send(f"<:correto:510894022861127680> | O seu bot `{usuario}` foi **aceito** pelo **{user.name}**;")
 
-                                                                            elif str(reaction.emoji) == ':incorreto:515523818358571039':
+                                                                            elif str(reaction.emoji) == '<:incorreto:515523818358571039>':
                                                                                 mtv1 = await client.get_channel(507570211499671576).send(f"{user.mention}, diga o motivo para **recusar** o bot `{usuario}`: `(2 minutos)`")
                                                                                 try:
                                                                                     mtv = await client.wait_for('message', check=lambda message: user == user, timeout=120)
@@ -340,16 +340,16 @@ async def on_message(message):
                                                                 await msg.add_reaction(":correto:515523764297924618")
                                                                 await msg.add_reaction(":incorreto:515523818358571039")
                                                                 def opt_check(reaction, user):
-                                                                    return reaction.message.id == msg.id and user == message.author and str(reaction.emoji) in ':correto:515523764297924618', ':incorreto:515523818358571039' 
+                                                                    return reaction.message.id == msg.id and user == message.author and str(reaction.emoji) in '<:correto:515523764297924618>', '<:incorreto:515523818358571039>' 
                                                                             
                                                                 try:
                                                                     reaction, user = await client.wait_for("reaction_add", check=opt_check, timeout=172800)
                                                                         
-                                                                    if str(reaction.emoji) == ':correto:515523764297924618':
+                                                                    if str(reaction.emoji) == '<:correto:515523764297924618>':
                                                                         await logs.send(f"<:correto:510894022861127680> | {message.author.mention}, seu bot `{usuario}` foi **aceito** pelo **{user.name}**.")
                                                                         await author.send(f"<:correto:510894022861127680> | O seu bot `{usuario}` foi **aceito** pelo **{user.name}**;")
 
-                                                                    elif str(reaction.emoji) == ':incorreto:515523818358571039':
+                                                                    elif str(reaction.emoji) == '<:incorreto:515523818358571039>':
                                                                         mtv1 = await client.get_channel(507570211499671576).send(f"{user.mention}, diga o motivo para **recusar** o bot `{usuario}`: `(2 minutos)`")
                                                                         try:
                                                                             mtv = await client.wait_for('message', check=lambda message: user == user, timeout=120)
