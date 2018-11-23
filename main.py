@@ -31,6 +31,8 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+    if message.content.lower().startswith("d.invite"):
+        await message.channel.send(f"{message.author.mention}, me adicione em seu servidor!\n- https://discordapp.com/oauth2/authorize?client_id=497012433378869250&permissions=8&scope=bot", delete_after=60)
 
     if message.content.lower().startswith("d.webabraçar"):
         try:
