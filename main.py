@@ -31,11 +31,14 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    ch = client.get_channel(512629173668413460)
-    if message.content in ch:   
+    if message.channel.id != 512629173668413460:
+        return
+    try:
         #message = message.content
         await message.add_reaction(":correto:510894022861127680")
         await message.add_reaction(":incorreto:510894050103263245")
+    except:
+        pass
 
     if message.content.lower().startswith("d.webabraçar"):
         try:
