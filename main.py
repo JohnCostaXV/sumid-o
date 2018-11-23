@@ -14,7 +14,7 @@ import datetime
 
 forms = []
 prefix = ["d."]
-cor = 0x34363B
+cor = 0x32363C
 client = commands.Bot(command_prefix=prefix, case_insensitive=True)
 shared = discord.AutoShardedClient(shard_count=2, shard_ids=(1,2))
 client.remove_command("help")
