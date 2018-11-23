@@ -311,19 +311,18 @@ async def on_message(message):
             await author.send(f"**{message.author.name}, para iniciar o processo precisamos que você libere suas mensagens privadas.**")
 
     if message.content.lower().startswith("d.testepv"):
-        user = message.author
         await message.author.send("Responda: `teste`")
         try:
-            def check(m):
+            def check(m, user):
                 return m.channel.id == user.id and m.author == user
 
             try:
-                resposta = await client.wait_for("message", check=check, timeout=120)
-                await message.channel.send(resposta.content)
+                resposta = await client.wait_for("message", check=check, timeout=20)
 
             except asyncio.TimeoutError:
                 await message.author.send("esgotado")
 
+            await message.channel.send(resposta.content)
         except Exception as e:
             await message.author.send(f'{e}')
 
