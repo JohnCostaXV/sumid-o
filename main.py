@@ -14,7 +14,7 @@ import datetime
 
 forms = []
 prefix = ["d."]
-cor = 0xffa500
+cor = 0xff7f50
 client = commands.Bot(command_prefix=prefix, case_insensitive=True)
 shared = discord.AutoShardedClient(shard_count=2, shard_ids=(1,2))
 client.remove_command("help")
@@ -35,8 +35,8 @@ async def on_message(message):
         return
     try:
         #message = message.content
-        await message.add_reaction(":Ativado:514076459799805954")
-        await message.add_reaction(":Desativado:514076460118573066")
+        await message.add_reaction(":correto:515523764297924618")
+        await message.add_reaction(":incorreto:515523818358571039")
     except:
         pass
 
