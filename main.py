@@ -30,7 +30,12 @@ async def on_ready():
         await asyncio.sleep(300)
 
 @client.event
-async def on_message(message):   
+async def on_message(message):
+    ch = client.get_channel(512629173668413460)
+    if message.content in ch:   
+        #message = message.content
+        await message.add_reaction(":correto:510894022861127680")
+        await message.add_reaction(":incorreto:510894050103263245")
 
     if message.content.lower().startswith("d.webabraçar"):
         try:
@@ -260,8 +265,10 @@ async def on_message(message):
                                                                             value=f"[link](https://discordapp.com/oauth2/authorize?client_id={usuario.id}&scope=bot&permissions=)"
                                                                         )
                                                                         forms.remove(message.author.id)
-                                                                        await client.get_channel(507570211499671576).send(embed=pendenteEm)                              
-                                                                
+                                                                        msg = await client.get_channel(507570211499671576).send(embed=pendenteEm)                              
+                                                                        await msg.add_reaction(":correto:510894022861127680")
+                                                                        await msg.add_reaction(":incorreto:510894050103263245")
+
                                                                 except asyncio.TimeoutError:
                                                                     await out1.delete()
 
@@ -302,8 +309,9 @@ async def on_message(message):
                                                                     value=f"[link](https://discordapp.com/oauth2/authorize?client_id={usuario.id}&scope=bot&permissions=)"
                                                                 )
                                                                 forms.remove(message.author.id)
-                                                                await client.get_channel(507570211499671576).send(embed=pendenteEm)  
-
+                                                                msg = await client.get_channel(507570211499671576).send(embed=pendenteEm)  
+                                                                await msg.add_reaction(":correto:510894022861127680")
+                                                                await msg.add_reaction(":incorreto:510894050103263245")
 
                                                         except asyncio.TimeoutError:
                                                             forms.remove(message.author.id)
