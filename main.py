@@ -343,14 +343,14 @@ async def on_message(message):
                                                                 await msg.add_reaction(":correto:515523764297924618")
                                                                 await msg.add_reaction(":incorreto:515523818358571039")
                                                                 def opt_check(reaction, user):
-                                                                    if reaction.bot:
-                                                                        return
                                                                     return reaction.message.id == msg.id and str(reaction.emoji) in '<:correto:515523764297924618>', '<:incorreto:515523818358571039>' 
                                                                             
                                                                 try:
-                                                                    if reaction.bot:
-                                                                        return
+                                                                    
                                                                     reaction, user = await client.wait_for("reaction_add", check=opt_check, timeout=172800)
+                                                                    
+                                                                    if user.bot:
+                                                                        return
                                                                         
                                                                     if str(reaction.emoji) == '<:correto:515523764297924618>':
                                                                         await msg.delete()
