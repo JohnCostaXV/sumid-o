@@ -285,20 +285,24 @@ async def on_message(message):
                                                                                 await author.send(f"<:correto:510894022861127680> | O seu bot `{usuario}` foi **aceito** pelo **{user.name}**;")
 
                                                                             elif str(reaction.emoji) == '<:incorreto:515523818358571039>':
-                                                                                mtv1 = await client.get_channel(507570211499671576).send(f"{user.mention}, diga o motivo para **recusar** o bot `{usuario}`: `(2 minutos)`")
+                                                                                mtv1 = await user.send(f"**{user.name}**, diga o **motivo** para **recusar** o bot `{usuario}`: `(2 minutos)`")
                                                                                 try:
-                                                                                    mtv = await client.wait_for('message', check=lambda message: user == reaction.author, timeout=120)
+                                                                                    mtv = await client.wait_for('message', check=lambda message: user == message.author, timeout=120)
+                                                                                
+                                                                                except asyncio.TimeoutError:
+                                                                                    await mtv1.delete()
+                                                                                    await msg.delete()
+                                                                                    await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```Nenhum motivo informado```")
+                                                                                    await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```Nenhum motivo informado```")
+
+                                                                                else:
                                                                                     if mtv.content == mtv.content:
                                                                                         await mtv1.delete()
                                                                                         await mtv.delete()
                                                                                         await msg.delete()
                                                                                         await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```{mtv.content}```")
                                                                                         await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```{mtv.content}```")
-                                                                                except asyncio.TimeoutError:
-                                                                                    await mtv1.delete()
-                                                                                    await msg.delete()
-                                                                                    await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```Nenhum motivo informado```")
-                                                                                    await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```Nenhum motivo informado```")
+                                                                                
                                                                           
                                                                                                                                                
 
@@ -367,22 +371,24 @@ async def on_message(message):
                                                                         await author.send(f"<:correto:510894022861127680> | O seu bot `{usuario}` foi **aceito** pelo **{user.name}**;")
 
                                                                     elif str(reaction.emoji) == '<:incorreto:515523818358571039>':
-                                                                        mtv1 = await client.get_channel(507570211499671576).send(f"{user.mention}, diga o motivo para **recusar** o bot `{usuario}`: `(2 minutos)`")
+                                                                        mtv1 = await user.send(f"**{user.name}**, diga o **motivo** para **recusar** o bot `{usuario}`: `(2 minutos)`")
                                                                         
                                                                         try:
-                                                                            mtv = await client.wait_for('message', check=lambda message: user == reaction.author, timeout=120)
+                                                                            mtv = await client.wait_for('message', check=lambda message: user == message.author, timeout=120)
                                                                         
+                                                                        except asyncio.TimeoutError:
+                                                                            await mtv1.delete()
+                                                                            await msg.delete()
+                                                                            await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```Nenhum motivo informado```")
+                                                                            await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```Nenhum motivo informado```")
+                                                                        else:
                                                                             if mtv.content == mtv.content:
                                                                                 await mtv1.delete()
                                                                                 await mtv.delete()
                                                                                 await msg.delete()
                                                                                 await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```{mtv.content}```")
                                                                                 await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```{mtv.content}```")
-                                                                        except asyncio.TimeoutError:
-                                                                            await mtv1.delete()
-                                                                            await msg.delete()
-                                                                            await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```Nenhum motivo informado```")
-                                                                            await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```Nenhum motivo informado```")
+                                                                        
                                                                     
                                                                 
 
