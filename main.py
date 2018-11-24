@@ -145,6 +145,27 @@ async def on_message(message):
         except discord.errors.Forbidden:
             await message.channel.send(f"❌ | **{message.author.name}**, estou **sem permissão** de `GERENCIAR WEBHOOKS`.")
 
+    if message.content.lower().startswith("d.vercep"):
+        args = message.content.split(" ")
+        cep = " ".join(int(str(args[1])))
+        url = requests.get("https://viacep.com.br/ws/"+cep+"/json/").json()
+        cep = url['cep']
+        rua = url['logradouro']
+        bairro = url['bairro']
+        cidade = url['localidade']
+        estado = url['uf']
+
+        embed = discord.Embed(
+            title="Endereços por CEP",
+            color=cor,
+            description="**Informações:**\n\n"
+                        "**Rua**: "+rua+"\n"
+                        "**Bairro**: "+bairro+"\n"
+                        "**Cidade**: "+cidade+"\n"
+                        "**Estado**: "+estado+"\n"
+        )
+        await message.channel.send(content=message.author.mention,embed=embed)
+
 
     if message.content.lower().startswith("d.addbot"):
         try:
