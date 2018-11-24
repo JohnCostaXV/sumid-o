@@ -12,6 +12,7 @@ import time
 import os
 import datetime
 
+
 forms = []
 prefix = ["d."]
 cor = 0x32363C
@@ -311,7 +312,7 @@ async def on_message(message):
                                                                         
 
                                                                         def opt_check(reaction, user):
-                                                                            return reaction.message.id == msg.id and user == message.author and str(reaction.emoji) in ['<:correto:515523764297924618>', '<:incorreto:515523818358571039>'] 
+                                                                            return reaction.message.id == msg.id and str(reaction.emoji) in ['<:correto:515523764297924618>', '<:incorreto:515523818358571039>'] 
                                                                             
                                                                         try:
                                                                             reaction, user = await client.wait_for("reaction_add", check=opt_check, timeout=172800)
@@ -393,7 +394,7 @@ async def on_message(message):
                                                                 await msg.add_reaction(":incorreto:515523818358571039")
                                                                 
                                                                 def opt_check(reaction, user):
-                                                                    return reaction.message.id == msg.id and user == message.author and str(reaction.emoji) in ['<:correto:515523764297924618>', '<:incorreto:515523818358571039>'] 
+                                                                    return reaction.message.id == msg.id and str(reaction.emoji) in ['<:correto:515523764297924618>', '<:incorreto:515523818358571039>'] 
                                                                             
                                                                 try:
                                                                     
