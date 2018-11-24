@@ -328,10 +328,10 @@ async def on_message(message):
                                                                                 await author.send(f"<:correto:510894022861127680> | O seu bot `{usuario}` foi **aceito** pelo **{user.name}**;")
 
                                                                             elif str(reaction.emoji) == '<:incorreto:515523818358571039>':
-                                                                                mtv1 = await user.send(f"**{user.name}**, diga o **motivo** para **recusar** o bot `{usuario}`: `(2 minutos)`")
+                                                                                mtv1 = await reaction.message.send(f"**{user.name}**, diga o **motivo** para **recusar** o bot `{usuario}`: `(2 minutos)`")
                                                                                 
                                                                                 def check(m):
-                                                                                    return m.message.author == user and m.channel.id == mtv1.channel.id
+                                                                                    return m.author == user and m.channel.id == mtv1.channel.id
                                                                                     
                                                                                 try:
                                                                                     mtv = await client.wait_for('message', check=check, timeout=120)
@@ -411,7 +411,7 @@ async def on_message(message):
                                                                         await author.send(f"<:correto:510894022861127680> | O seu bot `{usuario}` foi **aceito** pelo **{user.name}**;")
 
                                                                     elif str(reaction.emoji) == '<:incorreto:515523818358571039>':
-                                                                        mtv1 = await user.send(f"**{user.name}**, diga o **motivo** para **recusar** o bot `{usuario}`: `(2 minutos)`")
+                                                                        mtv1 = await reaction.message.send(f"**{user.name}**, diga o **motivo** para **recusar** o bot `{usuario}`: `(2 minutos)`")
                                                                                 
                                                                         def check(m):
                                                                             return m.author == user and m.channel.id == mtv1.channel.id
