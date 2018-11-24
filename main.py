@@ -204,6 +204,7 @@ async def on_message(message):
                                 try:
                                     usuario = await client.get_user_info(int(str(idbot.content)))
                                 except:
+                                    forms.remove(message.author.id)
                                     await author.send(f"<:incorreto:510894050103263245> | **{message.author.name}**, você pode apenas digitar um `ID` de um bot válido.")
                                 else:
                                     if usuario in message.guild.members:
@@ -434,6 +435,7 @@ async def on_message(message):
                                         
                     
                 except Exception as e:
+                    forms.remove(message.author.id)
                     print(e)    
             
         except discord.Forbidden:
