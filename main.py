@@ -286,6 +286,10 @@ async def on_message(message):
 
                                                                             elif str(reaction.emoji) == '<:incorreto:515523818358571039>':
                                                                                 mtv1 = await user.send(f"**{user.name}**, diga o **motivo** para **recusar** o bot `{usuario}`: `(2 minutos)`")
+                                                                                
+                                                                                def check(m):
+                                                                                    return m.message.author == user and m.channel.id == mtv1.channel.id
+                                                                                    
                                                                                 try:
                                                                                     mtv = await client.wait_for('message', check=lambda message: user == message.author, timeout=120)
                                                                                 
@@ -295,14 +299,15 @@ async def on_message(message):
                                                                                     await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```Nenhum motivo informado```")
                                                                                     await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```Nenhum motivo informado```")
 
-                                                                                
-                                                                                if mtv.content == mtv.content:
-                                                                                    await mtv1.delete()
-                                                                                    await mtv.delete()
-                                                                                    await msg.delete()
-                                                                                    await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```{mtv.content}```")
-                                                                                    await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```{mtv.content}```")
-                                                                                    return
+                                                                                else:
+
+                                                                                    if mtv.content == mtv.content:
+                                                                                        await mtv1.delete()
+                                                                                        await mtv.delete()
+                                                                                        await msg.delete()
+                                                                                        await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```{mtv.content}```")
+                                                                                        await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```{mtv.content}```")
+                                                                                        return
                                                                           
                                                                                                                                                
 
@@ -372,22 +377,28 @@ async def on_message(message):
 
                                                                     elif str(reaction.emoji) == '<:incorreto:515523818358571039>':
                                                                         mtv1 = await user.send(f"**{user.name}**, diga o **motivo** para **recusar** o bot `{usuario}`: `(2 minutos)`")
-                                                                        
+                                                                                
+                                                                        def check(m):
+                                                                            return m.message.author == user and m.channel.id == mtv1.channel.id
+                                                                                    
                                                                         try:
                                                                             mtv = await client.wait_for('message', check=lambda message: user == message.author, timeout=120)
-                                                                        
+                                                                                
                                                                         except asyncio.TimeoutError:
                                                                             await mtv1.delete()
                                                                             await msg.delete()
                                                                             await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```Nenhum motivo informado```")
                                                                             await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```Nenhum motivo informado```")
-                                                                        if mtv.content == mtv.content:
-                                                                            await mtv1.delete()
-                                                                            await mtv.delete()
-                                                                            await msg.delete()
-                                                                            await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```{mtv.content}```")
-                                                                            await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```{mtv.content}```")
-                                                                            return
+
+                                                                        else:
+
+                                                                            if mtv.content == mtv.content:
+                                                                                await mtv1.delete()
+                                                                                await mtv.delete()
+                                                                                await msg.delete()
+                                                                                await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```{mtv.content}```")
+                                                                                await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```{mtv.content}```")
+                                                                                return
                                                                     
                                                                 
 
