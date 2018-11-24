@@ -98,7 +98,7 @@ async def on_message(message):
         fundo = Image.open(BytesIO(img.content))
         avatar = Image.open(BytesIO(url.content))
                             #largura x altura
-        avatar = avatar.resize((800, 1000));
+        avatar = avatar.resize((900, 1100));
         avatar.save('procurado.png')
 
         fundo.paste(avatar, (210, 200))
