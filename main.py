@@ -167,16 +167,25 @@ async def on_message(message):
                 msg = await author.send("<:parceiro:510894109758586901> **|** **Então você quer adicionar o seu bot em nosso servidor?**\nPara isso precisamos que você preencha um pequeno formulário para cadastramento de seu BOT em nosso sistema e discord.\n\n<:bot:437248340724416514> **|** **Insira o `ID` do bot que deseja adicionar:** `2 minutos`")
                 forms.append(message.author.id)
                 try:
-                    if message.author is not server:
+                    if not message.author is not server:
+                        return
+                    else:
                         def check(m):
                             return m.author == message.author and m.channel.id == msg.channel.id
                         try:
                             idbot = await client.wait_for('message', check=check, timeout=120)
                         
+                        except asyncio.TimeoutError:
+                            await msg.delete()  
+
+                        else:
                             if idbot.content == idbot.content:
                                 await msg.delete()
                                 try:
                                     usuario = await client.get_user_info(int(str(idbot.content)))
+                                except:
+                                    await author.send(f"<:incorreto:510894050103263245> | **{message.author.name}**, você pode apenas digitar um `ID` de um bot válido.")
+                                else:
                                     if usuario in message.guild.members:
                                         forms.remove(message.author.id)
                                         ex = await author.send(f"<:incorreto:510894050103263245> **| {message.author.name}**, o `ID` fornecido pertence ao bot `{usuario}` no qual **ELE NÃO É SEU**. ")
@@ -201,7 +210,12 @@ async def on_message(message):
                                             try:
                                                 prefix = await client.wait_for('message', check=check, timeout=120)
                                                 await p.delete()
+                                            
+                                            except asyncio.TimeoutError:
+                                                forms.remove(message.author.id)
+                                                await p.delete()
 
+                                            else:
                                                 if prefix.content == prefix.content:
                                                     if len(prefix.content) +1 >= 8:
                                                         forms.remove(message.author.id)
@@ -218,6 +232,10 @@ async def on_message(message):
                                                         try:
                                                             lang = await client.wait_for('message', check=check, timeout=120)
                                                             await b.delete()
+                                                        except asyncio.TimeoutError:
+                                                            forms.remove(message.author.id)
+                                                            await b.delete()
+                                                        else:
                                                             if lang.content == "Outros":
                                                                 out1 = await author.send("<:DiscordDev:507925579245551616> **|** **Diga-nos o nome da biblioteca que você usou no desenvolvimento de seu BOT:** `2 minutos`")
                                                                 def check(m):
@@ -225,6 +243,9 @@ async def on_message(message):
                                                                 try:
                                                                     out = await client.wait_for('message', check=check, timeout=120)
                                                                     await out1.delete()
+                                                                except asyncio.TimeoutError:
+                                                                    await out1.delete()
+                                                                else:
                                                                     if out.content == out.content:
                                                                         await author.send(f"<:correto:510894022861127680> | **{message.author.name}**, você completou todo **processo** para **adicionar** o bot `{usuario}` em **nosso servidor**.\n**OBS:** O formulário passará para um supervisor para avaliação.")
                                                                         
@@ -311,8 +332,7 @@ async def on_message(message):
                                                                           
                                                                                                                                                
 
-                                                                except asyncio.TimeoutError:
-                                                                    await out1.delete()
+                                                                
 
                                                             
 
@@ -379,7 +399,7 @@ async def on_message(message):
                                                                         mtv1 = await user.send(f"**{user.name}**, diga o **motivo** para **recusar** o bot `{usuario}`: `(2 minutos)`")
                                                                                 
                                                                         def check(m):
-                                                                            return m.message.author == user and m.channel.id == mtv1.channel.id
+                                                                            return user == m.message.author  and m.channel.id == mtv1.channel.id
                                                                                     
                                                                         try:
                                                                             mtv = await client.wait_for('message', check=lambda message: user == message.author, timeout=120)
@@ -399,25 +419,8 @@ async def on_message(message):
                                                                                 await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```{mtv.content}```")
                                                                                 await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```{mtv.content}```")
                                                                                 return
-                                                                    
-                                                                
-
-                                                        except asyncio.TimeoutError:
-                                                            forms.remove(message.author.id)
-                                                            await b.delete()
-
-
-                                            except asyncio.TimeoutError:
-                                                forms.remove(message.author.id)
-                                                await p.delete()
-
-                                except:
-                                    await author.send(f"<:incorreto:510894050103263245> | **{message.author.name}**, você pode apenas digitar um `ID` de um bot válido.")         
-                        except asyncio.TimeoutError:
-                            await msg.delete()   
-
-                    else:
-                        return
+                                        
+                    
                 except Exception as e:
                     print(e)    
             else:
