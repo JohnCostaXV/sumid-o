@@ -31,7 +31,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
 
-    if message.content.lower().startswith("d.invite"):
+    if message.content.lower().startswith("d.invite "):
         await message.channel.send(f"{message.author.mention}, me adicione em seu servidor!\n- https://discordapp.com/oauth2/authorize?client_id=497012433378869250&permissions=8&scope=bot", delete_after=60)
 
     if message.content.lower().startswith("d.webabraçar"):
@@ -91,7 +91,7 @@ async def on_message(message):
                 await message.channel.send('Verifique se o código hexadecimal é este formato: `#7289DA`')
 
 
-    if message.content.lower().startswith("d.suafoto"):
+    if message.content.lower().startswith("d.suafoto "):
         url = requests.get(message.author.avatar_url)
         url1 = requests.get('https://i.imgur.com/VlvM1Au.png')
         fundo = Image.open(BytesIO(url1.content))
@@ -167,7 +167,7 @@ async def on_message(message):
         await message.channel.send(content=message.author.mention,embed=embed)
 
 
-    if message.content.lower().startswith("d.addbot"):
+    if message.content.lower().startswith("d.addbot "):
         try:
             if not message.guild.id == 498011182620475412:
                 return
