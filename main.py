@@ -399,14 +399,12 @@ async def on_message(message):
                                     forms.remove(message.author.id)
                                     await author.send(f"<:incorreto:510894050103263245> | **{message.author.name}**, você pode apenas digitar um `ID` de um bot válido.")         
                         except asyncio.TimeoutError:
-                            forms.remove(message.author.id)
                             await msg.delete()   
 
                     else:
                         forms.remove(message.author.id)
                         return
                 except Exception as e:
-                    forms.remove(message.author.id)
                     print(e)    
             else:
                 return
