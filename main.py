@@ -148,7 +148,9 @@ async def on_message(message):
 
     if message.content.lower().startswith("d.addbot"):
         try:
-            if message.guild.id == 498011182620475412:
+            if not message.guild.id == 498011182620475412:
+                return
+            else:
                 server = message.channel
                 new = client.get_guild(498011182620475412)
                 if message.author not in new.members:
@@ -239,7 +241,7 @@ async def on_message(message):
                                                             if lang.content == "Outros":
                                                                 out1 = await author.send("<:DiscordDev:507925579245551616> **|** **Diga-nos o nome da biblioteca que você usou no desenvolvimento de seu BOT:** `2 minutos`")
                                                                 def check(m):
-                                                                    return m.author == message.author and m.channel.id == lang.channel.id
+                                                                    return m.author == message.author and m.channel.id == out1.channel.id
                                                                 try:
                                                                     out = await client.wait_for('message', check=check, timeout=120)
                                                                     await out1.delete()
@@ -309,7 +311,7 @@ async def on_message(message):
                                                                                 mtv1 = await user.send(f"**{user.name}**, diga o **motivo** para **recusar** o bot `{usuario}`: `(2 minutos)`")
                                                                                 
                                                                                 def check(m):
-                                                                                    return user == m.message.author and m.channel.id == mtv1.channel.id
+                                                                                    return m.message.author == user and m.channel.id == mtv1.channel.id
                                                                                     
                                                                                 try:
                                                                                     mtv = await client.wait_for('message', check=check, timeout=120)
@@ -399,7 +401,7 @@ async def on_message(message):
                                                                         mtv1 = await user.send(f"**{user.name}**, diga o **motivo** para **recusar** o bot `{usuario}`: `(2 minutos)`")
                                                                                 
                                                                         def check(m):
-                                                                            return user == m.message.author and m.channel.id == mtv1.channel.id
+                                                                            return m.author == user and m.channel.id == mtv1.channel.id
                                                                                     
                                                                         try:
                                                                             mtv = await client.wait_for('message', check=check, timeout=120)
@@ -423,8 +425,7 @@ async def on_message(message):
                     
                 except Exception as e:
                     print(e)    
-            else:
-                return
+            
         except discord.Forbidden:
             await author.send(f"**{message.author.name}, para iniciar o processo precisamos que você libere suas mensagens privadas.**")
 
