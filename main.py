@@ -287,21 +287,21 @@ async def on_message(message):
                                                                             elif str(reaction.emoji) == '<:incorreto:515523818358571039>':
                                                                                 mtv1 = await user.send(f"**{user.name}**, diga o **motivo** para **recusar** o bot `{usuario}`: `(2 minutos)`")
                                                                                 try:
-                                                                                    mtv = await client.wait_for('message', check=lambda message: message.author == message.author, timeout=120)
+                                                                                    mtv = await client.wait_for('message', check=lambda message: message.author == user, timeout=120)
                                                                                 
                                                                                 except asyncio.TimeoutError:
                                                                                     await mtv1.delete()
                                                                                     await msg.delete()
-                                                                                    await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```Nenhum motivo informado```")
-                                                                                    await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```Nenhum motivo informado```")
+                                                                                    await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```Nenhum motivo informado```")
+                                                                                    await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```Nenhum motivo informado```")
 
                                                                                 else:
                                                                                     if mtv.content == mtv.content:
                                                                                         await mtv1.delete()
                                                                                         await mtv.delete()
                                                                                         await msg.delete()
-                                                                                        await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```{mtv.content}```")
-                                                                                        await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```{mtv.content}```")
+                                                                                        await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```{mtv.content}```")
+                                                                                        await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```{mtv.content}```")
                                                                                 
                                                                           
                                                                                                                                                
@@ -374,20 +374,20 @@ async def on_message(message):
                                                                         mtv1 = await user.send(f"**{user.name}**, diga o **motivo** para **recusar** o bot `{usuario}`: `(2 minutos)`")
                                                                         
                                                                         try:
-                                                                            mtv = await client.wait_for('message', check=lambda message: message.author == message.author, timeout=120)
+                                                                            mtv = await client.wait_for('message', check=lambda message: message.author == user, timeout=120)
                                                                         
                                                                         except asyncio.TimeoutError:
                                                                             await mtv1.delete()
                                                                             await msg.delete()
-                                                                            await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```Nenhum motivo informado```")
-                                                                            await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```Nenhum motivo informado```")
+                                                                            await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```Nenhum motivo informado```")
+                                                                            await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```Nenhum motivo informado```")
                                                                         else:
                                                                             if mtv.content == mtv.content:
                                                                                 await mtv1.delete()
                                                                                 await mtv.delete()
                                                                                 await msg.delete()
-                                                                                await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```{mtv.content}```")
-                                                                                await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\n\nMotivo:```{mtv.content}```")
+                                                                                await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```{mtv.content}```")
+                                                                                await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```{mtv.content}```")
                                                                         
                                                                     
                                                                 
@@ -415,14 +415,6 @@ async def on_message(message):
         except discord.Forbidden:
             await author.send(f"**{message.author.name}, para iniciar o processo precisamos que você libere suas mensagens privadas.**")
 
-    if message.channel.id != 512629173668413460:
-        return
-    try:
-        #message = message.content
-        await message.add_reaction(":correto:515523764297924618")
-        await message.add_reaction(":incorreto:515523818358571039")
-    except:
-        pass
 
 
 client.run(os.environ.get("token"))
