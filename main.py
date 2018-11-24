@@ -309,10 +309,10 @@ async def on_message(message):
                                                                                 mtv1 = await user.send(f"**{user.name}**, diga o **motivo** para **recusar** o bot `{usuario}`: `(2 minutos)`")
                                                                                 
                                                                                 def check(m):
-                                                                                    return m.message.author == user and m.channel.id == mtv1.channel.id
+                                                                                    return user == m.message.author and m.channel.id == mtv1.channel.id
                                                                                     
                                                                                 try:
-                                                                                    mtv = await client.wait_for('message', check=lambda message: user == message.author, timeout=120)
+                                                                                    mtv = await client.wait_for('message', check=check, timeout=120)
                                                                                 
                                                                                 except asyncio.TimeoutError:
                                                                                     await mtv1.delete()
@@ -399,10 +399,10 @@ async def on_message(message):
                                                                         mtv1 = await user.send(f"**{user.name}**, diga o **motivo** para **recusar** o bot `{usuario}`: `(2 minutos)`")
                                                                                 
                                                                         def check(m):
-                                                                            return user == m.message.author  and m.channel.id == mtv1.channel.id
+                                                                            return user == m.message.author and m.channel.id == mtv1.channel.id
                                                                                     
                                                                         try:
-                                                                            mtv = await client.wait_for('message', check=lambda message: user == message.author, timeout=120)
+                                                                            mtv = await client.wait_for('message', check=check, timeout=120)
                                                                                 
                                                                         except asyncio.TimeoutError:
                                                                             await mtv1.delete()
