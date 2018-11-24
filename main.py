@@ -148,7 +148,7 @@ async def on_message(message):
 
     if message.content.lower().startswith("d.vercep"):
         args = message.content.split(" ")
-        cep = " ".join(int(str(args[1])))
+        cep = " ".join(args[1:])
         url = requests.get("https://viacep.com.br/ws/"+cep+"/json/").json()
         cep = url['cep']
         rua = url['logradouro']
