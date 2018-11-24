@@ -287,7 +287,7 @@ async def on_message(message):
                                                                             elif str(reaction.emoji) == '<:incorreto:515523818358571039>':
                                                                                 mtv1 = await user.send(f"**{user.name}**, diga o **motivo** para **recusar** o bot `{usuario}`: `(2 minutos)`")
                                                                                 try:
-                                                                                    mtv = await client.wait_for('message', check=lambda message: user == message.author, timeout=120)
+                                                                                    mtv = await client.wait_for('message', check=lambda message: message.author == message.author, timeout=120)
                                                                                 
                                                                                 except asyncio.TimeoutError:
                                                                                     await mtv1.delete()
@@ -374,7 +374,7 @@ async def on_message(message):
                                                                         mtv1 = await user.send(f"**{user.name}**, diga o **motivo** para **recusar** o bot `{usuario}`: `(2 minutos)`")
                                                                         
                                                                         try:
-                                                                            mtv = await client.wait_for('message', check=lambda message: user == message.author, timeout=120)
+                                                                            mtv = await client.wait_for('message', check=lambda message: message.author == message.author, timeout=120)
                                                                         
                                                                         except asyncio.TimeoutError:
                                                                             await mtv1.delete()
