@@ -98,10 +98,10 @@ async def on_message(message):
         fundo = Image.open(BytesIO(img.content))
         avatar = Image.open(BytesIO(url.content))
                             #largura x altura
-        avatar = avatar.resize((900, 1100));
+        avatar = avatar.resize((970, 1100));
         avatar.save('procurado.png')
 
-        fundo.paste(avatar, (210, 200))
+        fundo.paste(avatar, (200, 300))
         fundo.save('procurado.png')
 
         await message.channel.send(file=discord.File('procurado.png'))
