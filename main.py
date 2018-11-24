@@ -323,7 +323,6 @@ async def on_message(message):
 
                                                                                     if mtv.content == mtv.content:
                                                                                         await mtv1.delete()
-                                                                                        await mtv.delete()
                                                                                         await msg.delete()
                                                                                         await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```{mtv.content}```")
                                                                                         await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```{mtv.content}```")
@@ -407,7 +406,6 @@ async def on_message(message):
 
                                                                             if mtv.content == mtv.content:
                                                                                 await mtv1.delete()
-                                                                                await mtv.delete()
                                                                                 await msg.delete()
                                                                                 await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```{mtv.content}```")
                                                                                 await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```{mtv.content}```")
