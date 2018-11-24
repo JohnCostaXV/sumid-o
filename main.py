@@ -92,6 +92,20 @@ async def on_message(message):
                 await message.channel.send('Verifique se o código hexadecimal é este formato: `#7289DA`')
 
 
+    if message.content.lower().startswith("d.procurado"):
+        url = requests.get(message.author.avatar_url)
+        img = requests.get('https://1.bp.blogspot.com/-Pup2Y3OdLog/WqLXBmgZ_1I/AAAAAAABAAw/BbTsnEIo7-0fDCSI6dtLzXxZXVBkgZg_QCLcBGAs/s1600/procura-se1.png')
+        fundo = Image.open(BytesIO(img.content))
+        avatar = Image.open(BytesIO(url.content))
+
+        avatar = avatar.resize((400, 400));
+        avatar.save('procurado.png')
+
+        fundo.paste(avatar, (100, 100))
+        funde.save('procurado.png')
+
+        await message.channel.send(file=discord.File('procurado.png'))
+
     if message.content.lower().startswith("d.suafoto"):
         url = requests.get(message.author.avatar_url)
         url1 = requests.get('https://i.imgur.com/VlvM1Au.png')
