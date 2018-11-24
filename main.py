@@ -328,7 +328,7 @@ async def on_message(message):
                                                                                 await author.send(f"<:correto:510894022861127680> | O seu bot `{usuario}` foi **aceito** pelo **{user.name}**;")
 
                                                                             elif str(reaction.emoji) == '<:incorreto:515523818358571039>':
-                                                                                mtv1 = await reaction.message.send(f"**{user.name}**, diga o **motivo** para **recusar** o bot `{usuario}`: `(2 minutos)`")
+                                                                                mtv1 = await client.get_channel(507570211499671576).send(f"**{user.name}**, diga o **motivo** para **recusar** o bot `{usuario}`: `(2 minutos)`")
                                                                                 
                                                                                 def check(m):
                                                                                     return m.author == user and m.channel.id == mtv1.channel.id
@@ -411,7 +411,7 @@ async def on_message(message):
                                                                         await author.send(f"<:correto:510894022861127680> | O seu bot `{usuario}` foi **aceito** pelo **{user.name}**;")
 
                                                                     elif str(reaction.emoji) == '<:incorreto:515523818358571039>':
-                                                                        mtv1 = await reaction.message.send(f"**{user.name}**, diga o **motivo** para **recusar** o bot `{usuario}`: `(2 minutos)`")
+                                                                        mtv1 = await client.get_channel(507570211499671576).send(f"**{user.name}**, diga o **motivo** para **recusar** o bot `{usuario}`: `(2 minutos)`")
                                                                                 
                                                                         def check(m):
                                                                             return m.author == user and m.channel.id == mtv1.channel.id
@@ -441,7 +441,6 @@ async def on_message(message):
             
         except discord.Forbidden:
             await author.send(f"**{message.author.name}, para iniciar o processo precisamos que você libere suas mensagens privadas.**")
-
 
 
 client.run(os.environ.get("token"))
