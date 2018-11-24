@@ -169,9 +169,6 @@ async def on_message(message):
                 msg = await author.send("<:parceiro:510894109758586901> **|** **Então você quer adicionar o seu bot em nosso servidor?**\nPara isso precisamos que você preencha um pequeno formulário para cadastramento de seu BOT em nosso sistema e discord.\n\n<:bot:437248340724416514> **|** **Insira o `ID` do bot que deseja adicionar:** `2 minutos`")
                 forms.append(message.author.id)
                 try:
-                    if not message.author is not server:
-                        return
-                    else:
                         def check(m):
                             return m.author == message.author and m.channel.id == msg.channel.id
                         try:
@@ -331,13 +328,7 @@ async def on_message(message):
                                                                                         await logs.send(f"<:incorreto:510894050103263245> | {message.author.mention}, seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```{mtv.content}```")
                                                                                         await author.send(f"<:incorreto:510894050103263245> | O seu bot `{usuario}` foi **recusado** pelo **{user.name}**.\nMotivo:```{mtv.content}```")
                                                                                         return
-                                                                          
-                                                                                                                                               
-
-                                                                
-
-                                                            
-
+                                                                        
                                                             elif lang.content == lang.content:
                                                                 await author.send(f"<:correto:510894022861127680> **|** **{message.author.name}**, você completou todo **processo** para **adicionar** o bot `{usuario}` em **nosso servidor**.\n**OBS:** O formulário passará para um supervisor para avaliação.")
 
