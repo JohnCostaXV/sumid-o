@@ -12,6 +12,7 @@ import time
 import os
 import datetime
 
+palavra = ["a", "b", "c"]
 
 forms = []
 prefix = ["d."]
@@ -118,6 +119,7 @@ async def on_message(message):
 
             fundo.paste(avatar, (118, 260))
             fundo.save('procurado.png')
+
 
             await message.channel.send(content=message.author.mention, file=discord.File('procurado.png'))
 
@@ -472,5 +474,9 @@ async def on_message(message):
         except discord.Forbidden:
             await author.send(f"**{message.author.name}, para iniciar o processo precisamos que você libere suas mensagens privadas.**")
 
+    if palavra in message.content.lower():
+        if message.author.bot:
+            return
+        await message.channel.send("a")
 
 client.run(os.environ.get("token"))
