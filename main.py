@@ -473,10 +473,13 @@ async def on_message(message):
             
         except discord.Forbidden:
             await author.send(f"**{message.author.name}, para iniciar o processo precisamos que você libere suas mensagens privadas.**")
+    
     for letras in palavra:
         if letras in message.content.lower():
             if message.author.bot:
                 return
             await message.channel.send("a")
+            cargo = discord.utils.get(message.guild.roles, name="entrada")
+            await message.author.add_roles(cargo)
 
 client.run(os.environ.get("token"))
