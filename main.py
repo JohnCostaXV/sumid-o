@@ -93,21 +93,8 @@ async def on_message(message):
 
 
     if message.content.lower().startswith("d.procurado"):
-        usuario = message.mentions[0]
-        if usuario == message.author:
-            url = requests.get(message.author.avatar_url)
-            img = requests.get('https://1.bp.blogspot.com/-Pup2Y3OdLog/WqLXBmgZ_1I/AAAAAAABAAw/BbTsnEIo7-0fDCSI6dtLzXxZXVBkgZg_QCLcBGAs/s1600/procura-se1.png')
-            fundo = Image.open(BytesIO(img.content))
-            avatar = Image.open(BytesIO(url.content))
-                                #largura x altura
-            avatar = avatar.resize((970, 1100));
-            avatar.save('procurado.png')
-
-            fundo.paste(avatar, (118, 260))
-            fundo.save('procurado.png')
-
-            await message.channel.send(content=message.author.mention, file=discord.File('procurado.png'))
-        else:
+        try:
+            usuario = message.mentions[0]    
             url = requests.get(usuario.avatar_url)
             img = requests.get('https://1.bp.blogspot.com/-Pup2Y3OdLog/WqLXBmgZ_1I/AAAAAAABAAw/BbTsnEIo7-0fDCSI6dtLzXxZXVBkgZg_QCLcBGAs/s1600/procura-se1.png')
             fundo = Image.open(BytesIO(img.content))
@@ -120,7 +107,19 @@ async def on_message(message):
             fundo.save('procurado.png')
 
             await message.channel.send(content=message.author.mention, file=discord.File('procurado.png'))
+        except IndexError:
+            url = requests.get(message.author.avatar_url)
+            img = requests.get('https://1.bp.blogspot.com/-Pup2Y3OdLog/WqLXBmgZ_1I/AAAAAAABAAw/BbTsnEIo7-0fDCSI6dtLzXxZXVBkgZg_QCLcBGAs/s1600/procura-se1.png')
+            fundo = Image.open(BytesIO(img.content))
+            avatar = Image.open(BytesIO(url.content))
+                                #largura x altura
+            avatar = avatar.resize((970, 1100));
+            avatar.save('procurado.png')
 
+            fundo.paste(avatar, (118, 260))
+            fundo.save('procurado.png')
+
+            await message.channel.send(content=message.author.mention, file=discord.File('procurado.png'))
 
 
     if message.content.lower().startswith("d.suafoto"):
